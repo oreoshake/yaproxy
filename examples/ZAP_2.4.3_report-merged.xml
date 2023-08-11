@@ -1,4 +1,4 @@
-<?xml version="1.0"?><OWASPZAPReport version="2.4.3" generated="Fri, 29 Jan 2016 12:17:58">
+<?xml version="1.0"?><OWASPYAPReport version="2.4.3" generated="Fri, 29 Jan 2016 12:17:58">
 <site name="http://localhost:8080" host="localhost" port="8080" ssl="false"><alerts><alertitem>
   <pluginid>10016</pluginid>
   <alert>Web Browser XSS Protection Not Enabled</alert>
@@ -731,102 +731,102 @@ Host: localhost:8080
   <instance>
   <uri>http://localhost:8080/bodgeit/advanced.jsp</uri>
   <param>product</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/advanced.jsp</uri>
   <param>price</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/advanced.jsp</uri>
   <param>description</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/advanced.jsp</uri>
   <param>type</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/advanced.jsp</uri>
   <param>q</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_7</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_21</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_14</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_28</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_22</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_30</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_23</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_1</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_19</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_25</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_9</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_18</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_2</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   <instance>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_10</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   </instance>
   </instances>
   <count>33</count>
@@ -836,4 +836,4 @@ Host: localhost:8080
   <cweid>134</cweid>
   <wascid>6</wascid>
 </alertitem>
-</alerts></site></OWASPZAPReport>
+</alerts></site></OWASPYAPReport>

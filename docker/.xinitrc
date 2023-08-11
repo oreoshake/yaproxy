@@ -1,3 +1,3 @@
 openbox &
 xsetroot -solid black
-zap.sh
+yap.sh

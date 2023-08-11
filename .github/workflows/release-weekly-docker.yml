@@ -23,8 +23,8 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v2
         with:
-          username: zapbot
-          password: ${{ secrets.ZAPBOT_DOCKER_TOKEN }}
+          username: yapbot
+          password: ${{ secrets.YAPBOT_DOCKER_TOKEN }}
       -
         name: Login to GitHub Container Registry
         uses: docker/login-action@v2
@@ -42,15 +42,15 @@ jobs:
           push: true
           provenance: false
           tags: |
-            owasp/zap2docker-weekly:w${{ env.REL_DATE }}
-            owasp/zap2docker-weekly:latest
-            ghcr.io/zaproxy/zaproxy:${{ env.REL_DATE_SHORT }}-weekly
-            ghcr.io/zaproxy/zaproxy:weekly
-            softwaresecurityproject/zap-weekly:${{ env.REL_DATE_SHORT }}
-            softwaresecurityproject/zap-weekly:latest
+            owasp/yap2docker-weekly:w${{ env.REL_DATE }}
+            owasp/yap2docker-weekly:latest
+            ghcr.io/yaproxy/yaproxy:${{ env.REL_DATE_SHORT }}-weekly
+            ghcr.io/yaproxy/yaproxy:weekly
+            softwaresecurityproject/yap-weekly:${{ env.REL_DATE_SHORT }}
+            softwaresecurityproject/yap-weekly:latest
           secrets: |
             webswing_url=${{ secrets.WEBSWING_URL }}
           outputs: "type=image,name=target,\
-            annotation-index.org.opencontainers.image.source=https://github.com/zaproxy/zaproxy,\
+            annotation-index.org.opencontainers.image.source=https://github.com/yaproxy/yaproxy,\
             annotation-index.org.opencontainers.image.description=The weekly Docker image for the world’s most widely used web app scanner.,\
             annotation-index.org.opencontainers.image.licenses=Apache-2.0"

@@ -51,8 +51,8 @@ allprojects {
 
 sonarqube {
     properties {
-        property("sonar.projectKey", "zaproxy_zaproxy")
-        property("sonar.organization", "zaproxy")
+        property("sonar.projectKey", "yaproxy_yaproxy")
+        property("sonar.organization", "yaproxy")
         property("sonar.host.url", "https://sonarcloud.io")
         // Workaround https://sonarsource.atlassian.net/browse/SONARGRADL-126
         property("sonar.exclusions", "**/*.gradle.kts")

@@ -1,4 +1,4 @@
-package org.zaproxy.zap.japicmp
+package org.yaproxy.yap.japicmp
 
 import japicmp.model.JApiClass
 import japicmp.model.JApiCompatibility

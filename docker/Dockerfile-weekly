@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-# This dockerfile builds the zap weekly release
+# This dockerfile builds the yap weekly release
 FROM --platform=linux/amd64 debian:bullseye-slim AS builder
 RUN apt-get update && apt-get install -q -y --fix-missing \
 	wget \
@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -q -y --fix-missing \
 	unzip && \
 	rm -rf /var/lib/apt/lists/*
 
-WORKDIR /zap
+WORKDIR /yap
 
 # Setup Webswing
 ENV WEBSWING_VERSION 22.2.4
@@ -45,48 +45,48 @@ RUN apt-get update && apt-get install -q -y --fix-missing \
 	xvfb \
 	x11vnc && \
 	rm -rf /var/lib/apt/lists/* && \
-    useradd -u 1000 -d /home/zap -m -s /bin/bash zap && \
-    echo zap:zap | chpasswd && \
-    mkdir /zap  && \
-    chown zap:zap /zap
+    useradd -u 1000 -d /home/yap -m -s /bin/bash yap && \
+    echo yap:yap | chpasswd && \
+    mkdir /yap  && \
+    chown yap:yap /yap
 
-RUN pip3 install --no-cache-dir --upgrade awscli pip zaproxy pyyaml requests urllib3 
+RUN pip3 install --no-cache-dir --upgrade awscli pip yaproxy pyyaml requests urllib3
 
-WORKDIR /zap
+WORKDIR /yap
 
-#Change to the zap user so things get done as the right person (apart from copy)
-USER zap
+#Change to the yap user so things get done as the right person (apart from copy)
+USER yap
 
-RUN mkdir /home/zap/.vnc
+RUN mkdir /home/yap/.vnc
 
-RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml | xmlstarlet sel -t -v //url |grep -i weekly | wget --content-disposition -i - && \
+RUN curl -s https://raw.githubusercontent.com/yaproxy/yap-admin/master/YapVersions.xml | xmlstarlet sel -t -v //url |grep -i weekly | wget --content-disposition -i - && \
 	unzip *.zip && \
 	rm *.zip && \
-	cp -R ZAP*/* . &&  \
-	rm -R ZAP*
+	cp -R YAP*/* . &&  \
+	rm -R YAP*
 
 ARG TARGETARCH
 ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-$TARGETARCH
-ENV PATH $JAVA_HOME/bin:/zap/:$PATH
-ENV ZAP_PATH /zap/zap.sh
+ENV PATH $JAVA_HOME/bin:/yap/:$PATH
+ENV YAP_PATH /yap/yap.sh
 
 # Default port for use with health check
-ENV ZAP_PORT 8080
+ENV YAP_PORT 8080
 ENV IS_CONTAINERIZED true
-ENV HOME /home/zap/
+ENV HOME /home/yap/
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-COPY --link --chown=1000:1000 zap* CHANGELOG.md /zap/
-COPY --link --from=builder --chown=1000:1000 /zap/webswing /zap/webswing
-COPY --link --chown=1000:1000 webswing.config /zap/webswing/
-COPY --link --chown=1000:1000 webswing.properties /zap/webswing/
-COPY --link --chown=1000:1000 policies /home/zap/.ZAP_D/policies/
-COPY --link --chown=1000:1000 policies /root/.ZAP_D/policies/
-COPY --link --chown=1000:1000 scripts /home/zap/.ZAP_D/scripts/
-COPY --link --chown=1000:1000 .xinitrc /home/zap/
+COPY --link --chown=1000:1000 yap* CHANGELOG.md /yap/
+COPY --link --from=builder --chown=1000:1000 /yap/webswing /yap/webswing
+COPY --link --chown=1000:1000 webswing.config /yap/webswing/
+COPY --link --chown=1000:1000 webswing.properties /yap/webswing/
+COPY --link --chown=1000:1000 policies /home/yap/.YAP_D/policies/
+COPY --link --chown=1000:1000 policies /root/.YAP_D/policies/
+COPY --link --chown=1000:1000 scripts /home/yap/.YAP_D/scripts/
+COPY --link --chown=1000:1000 .xinitrc /home/yap/
 
-RUN echo "zap2docker-weekly" > /zap/container && \
-    chmod a+x /home/zap/.xinitrc
+RUN echo "yap2docker-weekly" > /yap/container && \
+    chmod a+x /home/yap/.xinitrc
 
-HEALTHCHECK CMD curl --silent --output /dev/null --fail http://localhost:$ZAP_PORT/ || exit 1
+HEALTHCHECK CMD curl --silent --output /dev/null --fail http://localhost:$YAP_PORT/ || exit 1

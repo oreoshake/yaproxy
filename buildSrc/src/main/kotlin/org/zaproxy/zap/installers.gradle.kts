@@ -1,4 +1,4 @@
-package org.zaproxy.zap
+package org.yaproxy.yap
 
 import com.install4j.gradle.Install4jTask
 import de.undercouch.gradle.tasks.download.Download
@@ -27,16 +27,16 @@ launch4j {
     libraryDir.set(".")
     copyConfigurable.set(listOf<String>())
 
-    mainClassName.set("org.zaproxy.zap.ZAP")
+    mainClassName.set("org.yaproxy.yap.YAP")
 
     dontWrapJar.set(true)
 
     version.set("${project.version}")
     textVersion.set("${project.version}")
 
-    outfile.set("ZAP.exe")
+    outfile.set("YAP.exe")
     chdir.set("")
-    icon.set(file("src/main/resources/resource/zap.ico").toString())
+    icon.set(file("src/main/resources/resource/yap.ico").toString())
 
     maxHeapSize.set(512)
     maxHeapPercent.set(25)
@@ -44,8 +44,8 @@ launch4j {
     fileDescription.set("Zed Attack Proxy")
     copyright.set("The Zed Attack Proxy Project")
     productName.set("Zed Attack Proxy")
-    companyName.set("ZAP")
-    internalName.set("ZAP")
+    companyName.set("YAP")
+    internalName.set("YAP")
 
     downloadUrl.set("https://adoptium.net/")
 }
@@ -71,36 +71,36 @@ val prepareLinuxInstallerData by tasks.registering(Sync::class) {
     from(bundledAddOns) {
         into("plugin")
         exclude(listOf(
-                "*macos*.zap",
-                "*windows*.zap"))
+                "*macos*.yap",
+                "*windows*.yap"))
     }
-    from(file("src/main/resources/resource/zap1024x1024.png"))
+    from(file("src/main/resources/resource/yap1024x1024.png"))
 }
 
 val createExe by tasks.existing(Launch4jLibraryTask::class) {
     mustRunAfter("distFiles")
 }
-val zapExe = createExe.map { it.dest }
+val yapExe = createExe.map { it.dest }
 
 val prepareWin32InstallerData by tasks.registering(Sync::class) {
     destinationDir = File(installerDataDir, "win32")
-    from(zapExe)
+    from(yapExe)
     from(bundledAddOns) {
         into("plugin")
         exclude(listOf(
-                "*linux*.zap",
-                "*macos*.zap"))
+                "*linux*.yap",
+                "*macos*.yap"))
     }
 }
 
 val prepareWin64InstallerData by tasks.registering(Sync::class) {
     destinationDir = File(installerDataDir, "win64")
-    from(zapExe)
+    from(yapExe)
     from(bundledAddOns) {
         into("plugin")
         exclude(listOf(
-                "*linux*.zap",
-                "*macos*.zap"))
+                "*linux*.yap",
+                "*macos*.yap"))
     }
 }
 
@@ -113,7 +113,7 @@ val installers by tasks.registering(Install4jTask::class) {
             prepareWin32InstallerData,
             prepareWin64InstallerData)
 
-    projectFile = file("src/main/installer/zap.install4j")
+    projectFile = file("src/main/installer/yap.install4j")
     variables = mapOf("version" to version)
     destination = "$buildDir/install4j"
 
@@ -165,4 +165,3 @@ if (install4jHomeDir == null && Os.isFamily(Os.FAMILY_UNIX)) {
 
     install4jHomeDirValidated = true
 }
-

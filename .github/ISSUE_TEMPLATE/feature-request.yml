@@ -1,10 +1,10 @@
 name: Feature Request
-description: Suggest an idea for ZAP.
+description: Suggest an idea for YAP.
 labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
-      value: Thanks for taking the time to suggest a way to enhance ZAP! Fill out the form below to provide us with info to help fix the bug.
+      value: Thanks for taking the time to suggest a way to enhance YAP! Fill out the form below to provide us with info to help fix the bug.
   - type: textarea
     id: description
     attributes:

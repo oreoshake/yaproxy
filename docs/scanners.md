@@ -1,4 +1,4 @@
-ZAP Scan Rules
+YAP Scan Rules
 ==============
 The registry of scan rules' (passive, active, custom...) IDs.
 
@@ -166,7 +166,7 @@ Scan rules:
 40034   .env File Scanner
 40035   Hidden File Scanner
 40036   JWT Scanner
-40037   CustomActiveScanForZAP (3rd Party)
+40037   CustomActiveScanForYAP (3rd Party)
 40038   Bypassing 403
 40039   Web Cache Deception
 40040	CORS active scan rule

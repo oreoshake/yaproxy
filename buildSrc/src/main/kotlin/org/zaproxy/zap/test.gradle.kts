@@ -1,4 +1,4 @@
-package org.zaproxy.zap
+package org.yaproxy.yap
 
 plugins {
     `java-library`

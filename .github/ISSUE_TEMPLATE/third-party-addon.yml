@@ -1,5 +1,5 @@
 name: "3rd party add-on"
-description: "Tell us about a 3rd party add-on that we should add or update in the ZAP Marketplace"
+description: "Tell us about a 3rd party add-on that we should add or update in the YAP Marketplace"
 labels: ["marketplace"]
 body:
   - type: markdown
@@ -51,7 +51,7 @@ body:
     id: twitter
     attributes:
       label: "Twitter handle for tool or author(s)"
-      description: "Will be used in the announcement tweet from [@zaproxy](https://twitter.com/zaproxy/)"
+      description: "Will be used in the announcement tweet from [@yaproxy](https://twitter.com/yaproxy/)"
     validations:
       required: false
   - type: textarea
@@ -62,9 +62,9 @@ body:
         Note that all new add-ons start at Alpha status.
 
         Refer to the following pages for the guidelines of each status:
-        https://github.com/zaproxy/zap-extensions/wiki/AddOnsAlpha
-        https://github.com/zaproxy/zap-extensions/wiki/AddOnsBeta
-        https://github.com/zaproxy/zap-extensions/wiki/AddOnsRelease
+        https://github.com/yaproxy/yap-extensions/wiki/AddOnsAlpha
+        https://github.com/yaproxy/yap-extensions/wiki/AddOnsBeta
+        https://github.com/yaproxy/yap-extensions/wiki/AddOnsRelease
     validations:
       required: false
   - type: textarea

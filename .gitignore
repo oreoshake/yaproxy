@@ -7,7 +7,7 @@
 .gradle
 /build
 /buildSrc/build
-/zap/build
+/yap/build
 
 # JVM
 #----
@@ -26,7 +26,7 @@ hs_err_pid*
 /buildSrc/*.iws
 /buildSrc/out
 /out
-/zap/out
+/yap/out
 
 # Eclipse
 # -------
@@ -35,13 +35,13 @@ hs_err_pid*
 *.settings
 /bin
 /buildSrc/bin
-/zap/bin
+/yap/bin
 
 # NetBeans
 # --------
 .nb-gradle
 .nb-gradle-properties
 
-# ZAP
+# YAP
 # ---
-*.zap
+*.yap

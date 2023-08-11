@@ -1,0 +1,9 @@
+# Exclusions for japicmp.
+#
+# Any binary incompatible changes deemed acceptable should be added to this file.
+---
+packageExcludes: []
+fieldExcludes: []
+classExcludes: []
+methodExcludes:
+  - org.yaproxy.yap.extension.script.ScriptUI#displayScript(org.yaproxy.yap.extension.script.ScriptWrapper, boolean)

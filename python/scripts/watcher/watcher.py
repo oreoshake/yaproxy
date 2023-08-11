@@ -1,8 +1,8 @@
-# Zed Attack Proxy (ZAP) and its related class files.
+# Zed Attack Proxy (YAP) and its related class files.
 #
-# ZAP is an HTTP/HTTPS proxy for assessing web application security.
+# YAP is an HTTP/HTTPS proxy for assessing web application security.
 #
-# Copyright 2012 ZAP Development Team
+# Copyright 2012 YAP Development Team
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,25 +16,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script tests ZAP against the Watcher test pages: 
+# This script tests YAP against the Watcher test pages:
 #    http://www.nottrusted.com/watcher/
 #
 # To this script:
-# * Install the ZAP Python API: 
-#     Use ''pip install python-owasp-zap' 
-# * Start ZAP (as this is for testing purposes you might not want the
-#     'standard' ZAP to be started)
-# * Access http://www.nottrusted.com/watcher/ via your browser, proxying through ZAP
+# * Install the YAP Python API:
+#     Use ''pip install python-owasp-yap'
+# * Start YAP (as this is for testing purposes you might not want the
+#     'standard' YAP to be started)
+# * Access http://www.nottrusted.com/watcher/ via your browser, proxying through YAP
 # * Run the Spider against http://www.nottrusted.com/watcher/
 # * Run this script
 # * Open the report.html file generated in your browser
 #
 
-from zap import ZAP
+from yap import YAP
 import datetime
 
-# Change this if your version of ZAP is running on a different host and/or port:
-zapUrl = 'http://127.0.0.1:8090'
+# Change this if your version of YAP is running on a different host and/or port:
+yapUrl = 'http://127.0.0.1:8090'
 
 # Dictionary of abbreviation to keep the output a bit shorter
 abbrev = {
@@ -58,12 +58,12 @@ abbrev = {
 		'Weak Authentication Method' : 'WeakAuth',\
 		'X-Content-Type-Options header missing' : 'XContent',\
 		'X-Frame-Options header not set' : 'XFrame'}
-		
+
 # The rules to apply:
 # Column 1:	String to match against an alert URL
 # Column 2: Alert abbreviation to match
 # Column 3: pass or fail
-# 
+#
 rules = [ \
 		['Check.Pasv.Cookie.HttpOnly.php', 'HttpOnly', 'pass'], \
 		['Check.Pasv.Cookie.Secure.php', 'InsecureCookie', 'pass'],\
@@ -81,9 +81,9 @@ rules = [ \
 		['watcher/Check.Pasv.Cookie.Secure.php', 'InsecureCookie', 'pass'],\
 		]
 
-zap = ZAP(proxies={'http': zapUrl, 'https': zapUrl})
+yap = YAP(proxies={'http': yapUrl, 'https': yapUrl})
 
-alerts = zap.alerts
+alerts = yap.alerts
 
 uniqueUrls = set([])
 # alertsPerUrl is a dictionary of urlsummary to a dictionary of type to set of alertshortnames ;)
@@ -102,7 +102,7 @@ for alert in alerts:
 		urlSummary = urlEl[4]
 		short = abbrev.get(alert.get('alert'))
 		if (short is None):
-			print('No abbreviation for: ' + alert.get('alert'))  
+			print('No abbreviation for: ' + alert.get('alert'))
 			short = alert.get('alert')
 		aDict = alertsPerUrl.get(urlSummary, {'pass' : set([]), 'fail' : set([]), 'other' : set([])})
 		added = False
@@ -116,7 +116,7 @@ for alert in alerts:
 		alertsPerUrl[urlSummary] = aDict
 		plugins.add(alert.get('alert'))
 	uniqueUrls.add(url)
-	
+
 #for key, value in alertsPerUrl.iteritems():
 #	print key, value
 
@@ -127,9 +127,9 @@ for plugin in plugins:
 
 # Generate report file
 reportFile = open('report.html', 'w')
-reportFile.write("<html><head><title>ZAP Wavsep Report</title></head><body>\n")
+reportFile.write("<html><head><title>YAP Wavsep Report</title></head><body>\n")
 
-reportFile.write("<h1><img src=\"http://zaproxy.googlecode.com/svn/trunk/src/resource/zap64x64.png\" align=\"middle\">OWASP ZAP watcher results</h1>\n")
+reportFile.write("<h1><img src=\"http://yaproxy.googlecode.com/svn/trunk/src/resource/yap64x64.png\" align=\"middle\">OWASP YAP watcher results</h1>\n")
 reportFile.write("Generated: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M") + "\n")
 
 groupResults = []
@@ -200,13 +200,12 @@ reportFile.write("</table><br/>\n")
 
 reportFile.write("</body></html>\n")
 reportFile.close()
-	
+
 #for key, value in sorted(alertsPerUrl.iteritems()):
 #    print "%s: %s" % (key, value)
 
-#print ''	
-	
-print('')	
+#print ''
+
+print('')
 print('Got ' + str(len(alerts)) + ' alerts')
 print('Got ' + str(len(uniqueUrls)) + ' unique urls')
-

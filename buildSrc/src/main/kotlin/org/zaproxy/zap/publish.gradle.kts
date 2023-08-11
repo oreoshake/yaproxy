@@ -1,4 +1,4 @@
-package org.zaproxy.zap
+package org.yaproxy.yap
 
 plugins {
     `maven-publish`
@@ -37,7 +37,7 @@ publishing {
     }
 
     publications {
-        register<MavenPublication>("zap") {
+        register<MavenPublication>("yap") {
             from(components["java"])
 
             artifact(tasks["sourcesJar"])
@@ -46,32 +46,32 @@ publishing {
             pom {
                 name.set("Zed Attack Proxy")
                 packaging = "jar"
-                description.set("The Zed Attack Proxy (ZAP) is an easy to use integrated penetration testing tool for finding vulnerabilities in web applications. It is designed to be used by people with a wide range of security experience and as such is ideal for developers and functional testers who are new to penetration testing. ZAP provides automated scanners as well as a set of tools that allow you to find security vulnerabilities manually.")
-                url.set("https://www.zaproxy.org/")
+                description.set("The Zed Attack Proxy (YAP) is an easy to use integrated penetration testing tool for finding vulnerabilities in web applications. It is designed to be used by people with a wide range of security experience and as such is ideal for developers and functional testers who are new to penetration testing. YAP provides automated scanners as well as a set of tools that allow you to find security vulnerabilities manually.")
+                url.set("https://www.yaproxy.org/")
                 inceptionYear.set("2010")
 
                 organization {
-                    name.set("ZAP")
-                    url.set("https://www.zaproxy.org/")
+                    name.set("YAP")
+                    url.set("https://www.yaproxy.org/")
                 }
 
                 mailingLists {
                     mailingList {
-                        name.set("ZAP User Group")
-                        post.set("zaproxy-users@googlegroups.com")
-                        archive.set("https://groups.google.com/group/zaproxy-users")
+                        name.set("YAP User Group")
+                        post.set("yaproxy-users@googlegroups.com")
+                        archive.set("https://groups.google.com/group/yaproxy-users")
                     }
                     mailingList {
-                        name.set("ZAP Developer Group")
-                        post.set("zaproxy-develop@googlegroups.com")
-                        archive.set("https://groups.google.com/group/zaproxy-develop")
+                        name.set("YAP Developer Group")
+                        post.set("yaproxy-develop@googlegroups.com")
+                        archive.set("https://groups.google.com/group/yaproxy-develop")
                     }
                 }
 
                 scm {
-                    url.set("https://github.com/zaproxy/zaproxy")
-                    connection.set("scm:git:https://github.com/zaproxy/zaproxy.git")
-                    developerConnection.set("scm:git:https://github.com/zaproxy/zaproxy.git")
+                    url.set("https://github.com/yaproxy/yaproxy")
+                    connection.set("scm:git:https://github.com/yaproxy/yaproxy.git")
+                    developerConnection.set("scm:git:https://github.com/yaproxy/yaproxy.git")
                 }
 
                 licenses {
@@ -84,10 +84,10 @@ publishing {
 
                 developers {
                     developer {
-                        id.set("AllZapDevs")
-                        name.set("Everyone who has contributed to ZAP")
-                        email.set("zaproxy-develop@googlegroups.com")
-                        url.set("https://www.zaproxy.org/docs/desktop/credits/")
+                        id.set("AllYapDevs")
+                        name.set("Everyone who has contributed to YAP")
+                        email.set("yaproxy-develop@googlegroups.com")
+                        url.set("https://www.yaproxy.org/docs/desktop/credits/")
                     }
                 }
             }
@@ -97,7 +97,6 @@ publishing {
 
 signing {
     if (project.hasProperty("signing.keyId")) {
-        sign(publishing.publications["zap"])
+        sign(publishing.publications["yap"])
     }
 }
-

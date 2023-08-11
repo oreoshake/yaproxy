@@ -6,9 +6,9 @@ pluginManagement {
     }
 }
 
-rootProject.name = "zaproxy"
+rootProject.name = "yaproxy"
 
-include("zap")
+include("yap")
 
 rootProject.children.forEach { project -> setUpProject(settingsDir, project) }
 

@@ -46,11 +46,11 @@
             <include>WS.Tomcat</include>
         </tech>
         <urlparser>
-            <class>org.zaproxy.zap.model.StandardParameterParser</class>
+            <class>org.yaproxy.yap.model.StandardParameterParser</class>
             <config>{"kvps":"&amp;","kvs":"=","struct":[]}</config>
         </urlparser>
         <postparser>
-            <class>org.zaproxy.zap.model.StandardParameterParser</class>
+            <class>org.yaproxy.yap.model.StandardParameterParser</class>
             <config>{"kvps":"&amp;","kvs":"=","struct":[]}</config>
         </postparser>
         <authentication>

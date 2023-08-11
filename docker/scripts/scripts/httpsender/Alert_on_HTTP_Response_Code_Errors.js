@@ -8,7 +8,7 @@ if (!model) model = Java.type("org.parosproxy.paros.model.Model").getSingleton()
 
 var Pattern = Java.type("java.util.regex.Pattern")
 
-pluginid = 100000	// https://github.com/zaproxy/zaproxy/blob/main/docs/scanners.md
+pluginid = 100000	// https://github.com/yaproxy/yaproxy/blob/main/docs/scanners.md
 
 function sendingRequest(msg, initiator, helper) {
 	// Nothing to do
@@ -20,7 +20,7 @@ function responseReceived(msg, initiator, helper) {
 		return
 	}
 
-	var extensionAlert = control.getExtensionLoader().getExtension(org.zaproxy.zap.extension.alert.ExtensionAlert.NAME)
+	var extensionAlert = control.getExtensionLoader().getExtension(org.yaproxy.yap.extension.alert.ExtensionAlert.NAME)
 	if (extensionAlert != null) {
 		var code = msg.getResponseHeader().getStatusCode()
 		if (code < 400 || code >= 600) {
@@ -46,28 +46,28 @@ function responseReceived(msg, initiator, helper) {
 				var type
 				switch (initiator) {
 					case 1:	// PROXY_INITIATOR
-						type = 1 // Proxied 
+						type = 1 // Proxied
 						break
 					case 2:	// ACTIVE_SCANNER_INITIATOR
-						type = 3 // Scanner 
+						type = 3 // Scanner
 						break
 					case 3:	// SPIDER_INITIATOR
-						type = 2 // Spider 
+						type = 2 // Spider
 						break
 					case 4:	// FUZZER_INITIATOR
-						type = 8 // Fuzzer 
+						type = 8 // Fuzzer
 						break
 					case 5:	// AUTHENTICATION_INITIATOR
-						type = 15 // User 
+						type = 15 // User
 						break
 					case 6:	// MANUAL_REQUEST_INITIATOR
-						type = 15 // User 
+						type = 15 // User
 						break
 					case 8:	// BEAN_SHELL_INITIATOR
-						type = 15 // User 
+						type = 15 // User
 						break
 					case 9:	// ACCESS_CONTROL_SCANNER_INITIATOR
-						type = 13 // Access control 
+						type = 13 // Access control
 						break
 					default:
 						type = 15 // User - fallback

@@ -1,4 +1,4 @@
-package org.zaproxy.zap
+package org.yaproxy.yap
 
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -6,11 +6,11 @@ import de.undercouch.gradle.tasks.download.Download
 import de.undercouch.gradle.tasks.download.Verify
 import org.apache.tools.ant.filters.ReplaceTokens
 import org.apache.tools.ant.taskdefs.condition.Os
-import org.zaproxy.zap.tasks.internal.Utils
-import org.zaproxy.zap.tasks.CreateDmg
-import org.zaproxy.zap.tasks.DownloadMainAddOns
-import org.zaproxy.zap.tasks.GradleBuildWithGitRepos
-import org.zaproxy.zap.tasks.UpdateMainAddOns
+import org.yaproxy.yap.tasks.internal.Utils
+import org.yaproxy.yap.tasks.CreateDmg
+import org.yaproxy.yap.tasks.DownloadMainAddOns
+import org.yaproxy.yap.tasks.GradleBuildWithGitRepos
+import org.yaproxy.yap.tasks.UpdateMainAddOns
 
 plugins {
     de.undercouch.download
@@ -19,7 +19,7 @@ plugins {
 val dailyVersion = provider { "D-${extra["creationDate"]}" }
 
 val distDir = file("src/main/dist/")
-val bundledResourcesPath = "src/main/resources/org/zaproxy/zap/resources"
+val bundledResourcesPath = "src/main/resources/org/yaproxy/yap/resources"
 
 val jar by tasks.existing(Jar::class)
 
@@ -35,7 +35,7 @@ val downloadMainAddOns by tasks.registering(DownloadMainAddOns::class) {
 
 val updateMainAddOns by tasks.registering(UpdateMainAddOns::class) {
     group = "build"
-    description = "Updates the main add-ons from a ZapVersions.xml file."
+    description = "Updates the main add-ons from a YapVersions.xml file."
 
     addOnsData.set(mainAddOnsFile)
     addOnsDataUpdated.set(mainAddOnsFile)
@@ -53,13 +53,13 @@ val distFiles by tasks.registering(Sync::class) {
     destinationDir = file("$buildDir/distFiles")
     from(jar)
     from(distDir) {
-        filesMatching(listOf("zap.bat", "zap.sh")) {
-            filter<ReplaceTokens>("tokens" to mapOf("zapJar" to jar.get().archiveFileName.get()))
+        filesMatching(listOf("yap.bat", "yap.sh")) {
+            filter<ReplaceTokens>("tokens" to mapOf("yapJar" to jar.get().archiveFileName.get()))
         }
         exclude("README.weekly")
-        exclude("plugin/*.zap")
+        exclude("plugin/*.yap")
     }
-    from("src/main/resources/resource/zap.ico")
+    from("src/main/resources/resource/yap.ico")
     from(configurations.named("runtimeClasspath")) {
         into("lib")
     }
@@ -75,7 +75,7 @@ val distFiles by tasks.registering(Sync::class) {
         into("lang")
     }
     from(bundledResourcesPath) {
-        include("zapdb.script")
+        include("yapdb.script")
         into("db")
     }
     from(bundledResourcesPath) {
@@ -88,11 +88,11 @@ tasks.register<Zip>("distCrossplatform") {
     group = "Distribution"
     description = "Bundles the crossplatform distribution."
 
-    archiveFileName.set("ZAP_${project.version}_Crossplatform.zip")
+    archiveFileName.set("YAP_${project.version}_Crossplatform.zip")
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 
-    val topLevelDir = "ZAP_${project.version}"
+    val topLevelDir = "YAP_${project.version}"
     from(distFiles) {
         into(topLevelDir)
     }
@@ -119,7 +119,7 @@ val copyCoreAddOns by tasks.registering {
         sync {
             from(bundledAddOns) {
                 exclude { details: FileTreeElement ->
-                         !details.path.endsWith(".zap") ||
+                         !details.path.endsWith(".yap") ||
                          details.file.name.split("-")[0] !in coreAddOns
                 }
             }
@@ -132,11 +132,11 @@ tasks.register<Zip>("distCore") {
     group = "Distribution"
     description = "Bundles the core distribution."
 
-    archiveFileName.set("ZAP_${project.version}_Core.zip")
+    archiveFileName.set("YAP_${project.version}_Core.zip")
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 
-    val topLevelDir = "ZAP_${project.version}"
+    val topLevelDir = "YAP_${project.version}"
 
     from(distFiles) {
         into(topLevelDir)
@@ -151,18 +151,18 @@ tasks.register<Tar>("distLinux") {
     group = "Distribution"
     description = "Bundles the Linux distribution."
 
-    archiveFileName.set("ZAP_${project.version}_Linux.tar.gz")
+    archiveFileName.set("YAP_${project.version}_Linux.tar.gz")
     compression = Compression.GZIP
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 
-    val topLevelDir = "ZAP_${project.version}"
+    val topLevelDir = "YAP_${project.version}"
     from(distFiles) {
         into(topLevelDir)
     }
     from(bundledAddOns) {
         into("$topLevelDir/plugin")
-        exclude(listOf("Readme.txt", "*macos*.zap", "*windows*.zap"))
+        exclude(listOf("Readme.txt", "*macos*.yap", "*windows*.yap"))
     }
 }
 
@@ -171,7 +171,7 @@ listOf(
     MacArch("Arm64", "_aarch64", " (ARM64)", "aarch64", "78a07bd60c278f65bafd0df93890d909ff60259ccbd22ad71a1c3b312906508e")
 ).forEach { it ->
 
-    val volumeName = "ZAP"
+    val volumeName = "YAP"
     val appName = "$volumeName.app"
     val macOsJreDir = file("$buildDir/macOsJre${it.suffix}")
     val macOsJreUnpackDir = File(macOsJreDir, "unpacked")
@@ -207,7 +207,7 @@ listOf(
         }
         doLast {
             // Rename top level dir to start with "jre" to match the
-            // expectations of zap.sh script.
+            // expectations of yap.sh script.
             val dirName = macOsJreUnpackDir.listFiles()[0].name
             ant.withGroovyBuilder {
                 "move"(mapOf("file" to "$macOsJreUnpackDir/$dirName", "tofile" to "$macOsJreUnpackDir/jre-$dirName"))
@@ -228,22 +228,22 @@ listOf(
                         "JREDIR" to macOsJreUnpackDir.listFiles()[0].name,
                         "SHORT_VERSION_STRING" to "$version",
                         "VERSION_STRING" to "2",
-                        "ZAPJAR" to jar.get().archiveFileName.get()
+                        "YAPJAR" to jar.get().archiveFileName.get()
                     )
                 )
             }
         }
-        from("src/main/resources/resource/ZAP.icns") {
+        from("src/main/resources/resource/YAP.icns") {
             into("$appName/Contents/Resources/")
         }
-        val zapDir = "$appName/Contents/Java/"
+        val yapDir = "$appName/Contents/Java/"
         from(distFiles) {
-            into(zapDir)
-            exclude(listOf("zap.bat", "zap.ico"))
+            into(yapDir)
+            exclude(listOf("yap.bat", "yap.ico"))
         }
         from(bundledAddOns) {
-            into("$zapDir/plugin")
-            exclude(listOf("Readme.txt", "*linux*.zap", "*windows*.zap"))
+            into("$yapDir/plugin")
+            exclude(listOf("Readme.txt", "*linux*.yap", "*windows*.yap"))
         }
 
         doFirst {
@@ -282,12 +282,12 @@ val distDaily by tasks.registering(Zip::class) {
     group = "Distribution"
     description = "Bundles the daily distribution."
 
-    archiveFileName.set(dailyVersion.map { "ZAP_$it.zip" })
+    archiveFileName.set(dailyVersion.map { "YAP_$it.zip" })
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 
-    val rootDir = "ZAP_${dailyVersion.get()}"
-    val startScripts = listOf("zap.bat", "zap.sh")
+    val rootDir = "YAP_${dailyVersion.get()}"
+    val startScripts = listOf("yap.bat", "yap.sh")
 
     from(jarDaily) {
         into(rootDir)
@@ -296,12 +296,12 @@ val distDaily by tasks.registering(Zip::class) {
         into(rootDir)
         include(startScripts)
         filesMatching(startScripts) {
-            filter<ReplaceTokens>("tokens" to mapOf("zapJar" to jarDaily.get().archiveFileName.get()))
+            filter<ReplaceTokens>("tokens" to mapOf("yapJar" to jarDaily.get().archiveFileName.get()))
         }
     }
     from(File(distDir, "plugin")) {
         into("$rootDir/plugin")
-        include("*.zap")
+        include("*.yap")
     }
     from(distDir) {
         into(rootDir)
@@ -330,10 +330,10 @@ val buildWeeklyAddOns by tasks.registering(GradleBuildWithGitRepos::class) {
     clean.set(true)
 
     tasks {
-        if (System.getenv("ZAP_WEEKLY_ADDONS_NO_TEST") != "true") {
+        if (System.getenv("YAP_WEEKLY_ADDONS_NO_TEST") != "true") {
             register("test")
         }
-        register("copyZapAddOn") {
+        register("copyYapAddOn") {
             args.set(listOf("--into=$weeklyAddOnsDir"))
         }
     }
@@ -348,13 +348,13 @@ val prepareDistWeekly by tasks.registering(Sync::class) {
 
     dependsOn(buildWeeklyAddOns)
 
-    val startScripts = listOf("zap.bat", "zap.sh")
+    val startScripts = listOf("yap.bat", "yap.sh")
 
     from(jarDaily)
     from(distDir) {
         include(startScripts)
         filesMatching(startScripts) {
-            filter<ReplaceTokens>("tokens" to mapOf("zapJar" to jarDaily.get().archiveFileName.get()))
+            filter<ReplaceTokens>("tokens" to mapOf("yapJar" to jarDaily.get().archiveFileName.get()))
         }
     }
     from(weeklyAddOnsDir) {
@@ -376,12 +376,12 @@ tasks.register<Zip>("distWeekly") {
     group = "Distribution"
     description = "Bundles the weekly distribution."
 
-    archiveFileName.set(dailyVersion.map { "ZAP_WEEKLY_$it.zip" })
+    archiveFileName.set(dailyVersion.map { "YAP_WEEKLY_$it.zip" })
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 
     from(prepareDistWeekly) {
-        into("ZAP_${dailyVersion.get()}")
+        into("YAP_${dailyVersion.get()}")
     }
 }
 

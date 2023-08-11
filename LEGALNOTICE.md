@@ -1,11 +1,11 @@
 COPYRIGHT
 ---------
 
-Zed Attack Proxy (ZAP)
+Zed Attack Proxy (YAP)
 
 The software package is:
 
-    Copyright © 2010-2022 ZAP Development Team
+    Copyright © 2010-2022 YAP Development Team
 
 Individual contributions, components, and libraries are copyright of their
 respective authors.
@@ -20,7 +20,7 @@ in ApacheLicense-2.0.txt.
 THIRD-PARTY SOFTWARE LICENSES
 -----------------------------
 
-ZAP is a fork of Paros Proxy 3.2.13 developed by Chinotec Technologies Company
+YAP is a fork of Paros Proxy 3.2.13 developed by Chinotec Technologies Company
 and licensed under the Clarified Artistic License.
 
 In October 2014, imported files licensed under the GPL were relicensed with

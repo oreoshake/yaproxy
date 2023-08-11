@@ -1,7 +1,6 @@
 def pytest_addoption(parser):
-    parser.addoption("--zapconfig", action="store", default="test_zap.config",
-        help="ZAP client configuration file, default: test_zap.config")
+    parser.addoption("--yapconfig", action="store", default="test_yap.config",
+        help="YAP client configuration file, default: test_yap.config")
 
-def pytest_funcarg__zapconfig(request):
-    return request.config.option.zapconfig
-
+def pytest_funcarg__yapconfig(request):
+    return request.config.option.yapconfig

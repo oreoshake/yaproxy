@@ -1,8 +1,8 @@
-# Zed Attack Proxy (ZAP) and its related class files.
+# Zed Attack Proxy (YAP) and its related class files.
 #
-# ZAP is an HTTP/HTTPS proxy for assessing web application security.
+# YAP is an HTTP/HTTPS proxy for assessing web application security.
 #
-# Copyright 2012 ZAP Development Team
+# Copyright 2012 YAP Development Team
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,16 +16,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script tests ZAP against wavsep: http://code.google.com/p/wavsep/
-# Note wavsep has to be installed somewhere - the above link is to the 
+# This script tests YAP against wavsep: http://code.google.com/p/wavsep/
+# Note wavsep has to be installed somewhere - the above link is to the
 # project not the test suite!
 #
 # To this script:
-# * Install the ZAP Python API: 
-#     Use 'pip install python-owasp-zap-v2'
-# * Start ZAP (as this is for testing purposes you might not want the
-#     'standard' ZAP to be started)
-# * Access wavsep via your browser, proxying through ZAP
+# * Install the YAP Python API:
+#     Use 'pip install python-owasp-yap-v2'
+# * Start YAP (as this is for testing purposes you might not want the
+#     'standard' YAP to be started)
+# * Access wavsep via your browser, proxying through YAP
 # * Vist all of the wavsep top level URLs, e.g.
 #     http://localhost:8080/wavsep/index-active.jsp
 #     http://localhost:8080/wavsep/index-passive.jsp
@@ -37,28 +37,28 @@
 # Notes:
 # This has been tested against wavsep 1.5
 
-from zapv2 import ZAPv2
+from yapv2 import YAPv2
 import datetime, sys, getopt
 
 def main(argv):
 	# -------------------------------------------------------------------------
 	# Default Configurations - use -h and -p for different host and port
 	# -------------------------------------------------------------------------
-	zapHost = '127.0.0.1'
-	zapPort = '8090'
+	yapHost = '127.0.0.1'
+	yapPort = '8090'
 
 	try:
 		opts, args = getopt.getopt(argv,"h:p:")
 	except getopt.GetoptError:
-		print('wavsep.py -h <ZAPhost> -p <ZAPport>')
+		print('wavsep.py -h <YAPhost> -p <YAPport>')
 		sys.exit(2)
 	for opt, arg in opts:
 		if opt == '-h':
-			zapHost = arg
+			yapHost = arg
 		elif opt == '-p':
-			zapPort = arg
+			yapPort = arg
 
-	zapUrl = 'http://' + zapHost + ':' + zapPort
+	yapUrl = 'http://' + yapHost + ':' + yapPort
 
 	# Dictionary of abbreviation to keep the output a bit shorter
 	abbrev = {
@@ -109,7 +109,7 @@ def main(argv):
 	# Column 1:	String to match against an alert URL
 	# Column 2: Alert abbreviation to match
 	# Column 3: pass, fail, ignore
-	# 
+	#
 	rules = [ \
 			# All these appear to be valid ;)
 			['-', 'InfoDebug', 'ignore'], \
@@ -188,7 +188,7 @@ def main(argv):
 			['RXSS-Detection-Evaluation', 'RXSS', 'pass'], \
 			['RXSS-FalsePositives-GET', 'DXSS', 'fail'], \
 			['RXSS-FalsePositives-GET', 'RXSS', 'fail'], \
-		
+
 			['SInjection-Detection-Evaluation', 'SQLfp', 'pass'], \
 			['SInjection-Detection-Evaluation', 'SQLi', 'pass'], \
 			#['SInjection-Detection-Evaluation', 'SqlHyper', 'pass'], \
@@ -212,14 +212,14 @@ def main(argv):
 			['SInjection-FalsePositives', 'SqlMySqlT', 'fail'], \
 			['SInjection-FalsePositives', 'SqlOracleT', 'fail'], \
 			['SInjection-FalsePositives', 'SqlPostgreT', 'fail'], \
-		
+
 			['info-cookie-no-httponly', 'HttpOnly', 'pass'], \
 			['info-server-stack-trace', 'AppError', 'pass'], \
 			['session-password-autocomplete', 'Auto', 'pass'], \
 			['weak-authentication-basic', 'WeakAuth', 'pass'], \
 			]
 
-	zap = ZAPv2(proxies={'http': zapUrl, 'https': zapUrl})
+	yap = YAPv2(proxies={'http': yapUrl, 'https': yapUrl})
 
 
 	uniqueUrls = set([])
@@ -232,13 +232,13 @@ def main(argv):
 	alertIgnoreCount = {}
 	alertOtherCount = {}
 
-	zapVersion = zap.core.version
+	yapVersion = yap.core.version
 
 	totalAlerts = 0
 	offset = 0
 	page = 100
-	# Page through the alerts as otherwise ZAP can hang...
-	alerts = zap.core.alerts('', offset, page)
+	# Page through the alerts as otherwise YAP can hang...
+	alerts = yap.core.alerts('', offset, page)
 	while len(alerts) > 0:
 		totalAlerts += len(alerts)
 		for alert in alerts:
@@ -252,7 +252,7 @@ def main(argv):
 				if (urlEl[3] != 'wavsep'):
 					print('Ignoring non wavsep URL 4:' + urlEl[4] + ' URL 5:' + urlEl[5]  + ' URL 6:' + urlEl[6])
 					continue
-				
+
 				if (urlEl[6].split('-')[0][:9] == 'index.jsp'):
 					#print 'Ignoring index URL 4:' + urlEl[4] + ' URL 5:' + urlEl[5]  + ' URL 6:' + urlEl[6]
 					continue
@@ -264,7 +264,7 @@ def main(argv):
 				else:
 					# Passive URLs have different format
 					urlSummary = urlEl[4] + ' : ' + urlEl[5] + ' : ' + urlEl[6]
-				
+
 				#print 'URL summary:' + urlSummary
 				short = abbrev.get(alert.get('alert'))
 				if (short is None):
@@ -291,8 +291,8 @@ def main(argv):
 				plugins.add(alert.get('alert'))
 			uniqueUrls.add(url)
 		offset += page
-		alerts = zap.core.alerts('', offset, page)
-	
+		alerts = yap.core.alerts('', offset, page)
+
 	#for key, value in alertsPerUrl.iteritems():
 	#	print key, value
 
@@ -300,13 +300,13 @@ def main(argv):
 	reportFile = open('report.html', 'w')
 	reportFile.write("<html>\n")
 	reportFile.write("  <head>\n")
-	reportFile.write("    <title>ZAP Wavsep Report</title>\n")
+	reportFile.write("    <title>YAP Wavsep Report</title>\n")
 	reportFile.write("    <!--Load the AJAX API-->\n")
 	reportFile.write("    <script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>\n")
 	reportFile.write("  </head>\n")
 	reportFile.write("<body>\n")
 
-	reportFile.write("<h1><img src=\"https://raw.githubusercontent.com/zaproxy/zaproxy/main/zap/src/main/resources/resource/zap64x64.png\" align=\"middle\">OWASP ZAP wavsep results</h1>\n")
+	reportFile.write("<h1><img src=\"https://raw.githubusercontent.com/yaproxy/yaproxy/main/yap/src/main/resources/resource/yap64x64.png\" align=\"middle\">OWASP YAP wavsep results</h1>\n")
 	reportFile.write("Generated: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M") + "\n")
 
 	topResults = []
@@ -322,7 +322,7 @@ def main(argv):
 		top = key.split(' : ')[1]
 		if ('-' in top):
 			top = top.split('-')[0] + '-' + top.split('-')[1]
-		
+
 		if (top != thisTop[0]):
 			thisTop = [top, 0, 0]	# top, pass, fail
 			topResults.append(thisTop)
@@ -334,7 +334,7 @@ def main(argv):
 			thisTop[1] += 1
 		else:
 			thisTop[2] += 1
-		
+
 	# Calculate the group scores
 	for key, value in sorted(alertsPerUrl.items()):
 		group = key.split(' : ')[1]
@@ -368,7 +368,7 @@ def main(argv):
 	total = 100 * totalPass / (totalPass + totalFail)
 	reportFile.write(str(total) + "%<br/><br/>\n")
 
-	reportFile.write('ZAP Version: ' + zapVersion + '<br/>\n')
+	reportFile.write('YAP Version: ' + yapVersion + '<br/>\n')
 	reportFile.write('URLs found: ' + str(len(uniqueUrls)))
 
 	# Output the top level table
@@ -466,7 +466,7 @@ def main(argv):
 		else:
 			reportFile.write("<font style=\"BACKGROUND-COLOR: RED\">&nbsp;FAIL&nbsp</font>")
 		reportFile.write("</td>")
-	
+
 		reportFile.write("<td>")
 		if (value.get('pass') is not None):
 			reportFile.write(" ".join(value.get('pass')))
@@ -505,8 +505,8 @@ def main(argv):
 	reportFile.write("    data.addColumn('string', 'Plugin');\n")
 	reportFile.write("    data.addColumn('number', 'Time in ms');\n")
 	reportFile.write("    data.addRows([\n")
-        
-	progress = zap.ascan.scan_progress()
+
+	progress = yap.ascan.scan_progress()
 	# Loop through first time for the chart
 	for plugin in progress[1]['HostProcess']:
 		reportFile.write("      ['" + plugin['Plugin'][0] + "', " + plugin['Plugin'][3] + "],\n")
@@ -557,18 +557,17 @@ def main(argv):
 
 	reportFile.write("</body></html>\n")
 	reportFile.close()
-	
+
 	#for key, value in sorted(alertsPerUrl.iteritems()):
 	#    print "%s: %s" % (key, value)
 
-	#print ''	
-	
-	print('')	
+	#print ''
+
+	print('')
 	print('Got ' + str(totalAlerts) + ' alerts')
 	print('Got ' + str(len(uniqueUrls)) + ' unique urls')
 	print('Took ' + time)
 	print('Score ' + str(total))
 
 if __name__ == "__main__":
-	main(sys.argv[1:])   
-
+	main(sys.argv[1:])

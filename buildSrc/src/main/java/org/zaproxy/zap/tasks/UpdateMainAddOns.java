@@ -1,9 +1,9 @@
 /*
- * Zed Attack Proxy (ZAP) and its related class files.
+ * Zed Attack Proxy (YAP) and its related class files.
  *
- * ZAP is an HTTP/HTTPS proxy for assessing web application security.
+ * YAP is an HTTP/HTTPS proxy for assessing web application security.
  *
- * Copyright 2022 The ZAP Development Team
+ * Copyright 2022 The YAP Development Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zaproxy.zap.tasks;
+package org.yaproxy.yap.tasks;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -28,21 +28,21 @@ import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.options.Option;
-import org.zaproxy.zap.tasks.internal.MainAddOn;
-import org.zaproxy.zap.tasks.internal.MainAddOnsData;
-import org.zaproxy.zap.tasks.internal.MarketplaceAddOn;
-import org.zaproxy.zap.tasks.internal.Utils;
+import org.yaproxy.yap.tasks.internal.MainAddOn;
+import org.yaproxy.yap.tasks.internal.MainAddOnsData;
+import org.yaproxy.yap.tasks.internal.MarketplaceAddOn;
+import org.yaproxy.yap.tasks.internal.Utils;
 
 public abstract class UpdateMainAddOns extends DefaultTask {
 
     @InputFile
-    public abstract RegularFileProperty getZapVersions();
+    public abstract RegularFileProperty getYapVersions();
 
     @Option(
-            option = "zap-versions",
-            description = "The file system path to a ZapVersions.xml file.")
-    public void setZapVersionsPath(String path) {
-        getZapVersions().set(getProject().getParent().file(path));
+            option = "yap-versions",
+            description = "The file system path to a YapVersions.xml file.")
+    public void setYapVersionsPath(String path) {
+        getYapVersions().set(getProject().getParent().file(path));
     }
 
     @InputFile
@@ -53,8 +53,8 @@ public abstract class UpdateMainAddOns extends DefaultTask {
 
     @TaskAction
     public void update() throws IOException {
-        Path zapVersions = getZapVersions().getAsFile().get().toPath();
-        Map<String, MarketplaceAddOn> marketplace = Utils.getZapVersionsAddOns(zapVersions);
+        Path yapVersions = getYapVersions().getAsFile().get().toPath();
+        Map<String, MarketplaceAddOn> marketplace = Utils.getYapVersionsAddOns(yapVersions);
         MainAddOnsData data = Utils.parseData(getAddOnsData().get().getAsFile().toPath());
         updateAddOns(data, marketplace);
 

@@ -1,8 +1,8 @@
-name: zaproxy
+name: yaproxy
 version: '2.13.0'
-summary: ZAP, a tool for finding vulnerabilities in web applications
+summary: YAP, a tool for finding vulnerabilities in web applications
 description: |
-  The Zed Attack Proxy (ZAP) is one of the world’s most popular free security tools
+  The Zed Attack Proxy (YAP) is one of the world’s most popular free security tools
   and is actively maintained by dedicated international team of volunteers.
   It can help you automatically find security vulnerabilities in your web applications
   while you are developing and testing your applications.
@@ -13,10 +13,10 @@ grade: stable
 confinement: classic
 
 apps:
-  zaproxy:
+  yaproxy:
     command-chain:
       - bin/desktop-launch
-    command: zap.sh
+    command: yap.sh
     environment:
       XDG_DATA_HOME: "$SNAP/usr/share"
       FONTCONFIG_PATH: "$SNAP/etc/fonts"
@@ -24,8 +24,8 @@ apps:
       PATH: $JAVA_HOME/bin:$PATH
 
 parts:
-  zaproxy:
-    source: https://github.com/zaproxy/zaproxy/releases/download/v2.13.0/ZAP_2.13.0_Linux.tar.gz
+  yaproxy:
+    source: https://github.com/yaproxy/yaproxy/releases/download/v2.13.0/YAP_2.13.0_Linux.tar.gz
     plugin: dump
     filesets:
       pkg-contents: [ ./* ]

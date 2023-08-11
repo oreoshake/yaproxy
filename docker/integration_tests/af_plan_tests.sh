@@ -3,18 +3,18 @@
 
 RES=0
 
-mkdir -p /zap/wrk/output
+mkdir -p /yap/wrk/output
 
 echo "Automation Framework integration tests"
 echo
 
-cd /zap/wrk/configs/plans/
+cd /yap/wrk/configs/plans/
 
 export JIGSAW_USER="guest"
 export JIGSAW_PWORD="guest"
 
 # Install dev add-on
-/zap/zap.sh -cmd -addoninstall dev
+/yap/yap.sh -cmd -addoninstall dev
 
 summary="\nSummary:\n"
 
@@ -23,10 +23,10 @@ do
 	echo
 	echo "Plan: $file"
 
-    /zap/zap.sh -cmd -autorun /zap/wrk/configs/plans/$file -dev
+    /yap/yap.sh -cmd -autorun /yap/wrk/configs/plans/$file -dev
     RET=$?
-    
-	if [ "$RET" != 0 ] 
+
+	if [ "$RET" != 0 ]
 	then
 	    echo "ERROR"
 		summary="${summary}  Plan: $file\tERROR\n"
@@ -37,7 +37,7 @@ do
 	fi
     sleep 2
     # Tidy up
-    rm ~/.ZAP_D/config.xml
+    rm ~/.YAP_D/config.xml
 done
 
 echo -e $summary

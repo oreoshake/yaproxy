@@ -1,22 +1,22 @@
-package org.zaproxy.zap
+package org.yaproxy.yap
 
 import com.install4j.gradle.Install4jTask
 import java.util.regex.Pattern
-import org.zaproxy.zap.GitHubUser
-import org.zaproxy.zap.GitHubRepo
-import org.zaproxy.zap.tasks.CreateDmg
-import org.zaproxy.zap.tasks.CreateGitHubRelease
-import org.zaproxy.zap.tasks.CreateMainRelease
-import org.zaproxy.zap.tasks.CreatePullRequest
-import org.zaproxy.zap.tasks.CreateTagAndGitHubRelease
-import org.zaproxy.zap.tasks.HandleMainRelease
-import org.zaproxy.zap.tasks.HandleWeeklyRelease
-import org.zaproxy.zap.tasks.PrepareMainRelease
-import org.zaproxy.zap.tasks.PrepareNextDevIter
-import org.zaproxy.zap.tasks.UploadAssetsGitHubRelease
+import org.yaproxy.yap.GitHubUser
+import org.yaproxy.yap.GitHubRepo
+import org.yaproxy.yap.tasks.CreateDmg
+import org.yaproxy.yap.tasks.CreateGitHubRelease
+import org.yaproxy.yap.tasks.CreateMainRelease
+import org.yaproxy.yap.tasks.CreatePullRequest
+import org.yaproxy.yap.tasks.CreateTagAndGitHubRelease
+import org.yaproxy.yap.tasks.HandleMainRelease
+import org.yaproxy.yap.tasks.HandleWeeklyRelease
+import org.yaproxy.yap.tasks.PrepareMainRelease
+import org.yaproxy.yap.tasks.PrepareNextDevIter
+import org.yaproxy.yap.tasks.UploadAssetsGitHubRelease
 
-val ghUser = GitHubUser("zapbot", "12745184+zapbot@users.noreply.github.com", System.getenv("ZAPBOT_TOKEN"))
-val zaproxyRepo = GitHubRepo("zaproxy", "zaproxy", rootDir)
+val ghUser = GitHubUser("yapbot", "12745184+yapbot@users.noreply.github.com", System.getenv("YAPBOT_TOKEN"))
+val yaproxyRepo = GitHubRepo("yaproxy", "yaproxy", rootDir)
 
 tasks.register<CreateTagAndGitHubRelease>("createWeeklyRelease") {
     val dateProvider = provider { project.extra["creationDate"] }
@@ -45,14 +45,14 @@ val prepareNextDevIter by tasks.registering(PrepareNextDevIter::class) {
     propertiesFile.set(File(projectDir, "gradle.properties"))
 
     versionProperty.set("version")
-    versionBcProperty.set("zap.japicmp.baseversion")
+    versionBcProperty.set("yap.japicmp.baseversion")
 
     japicmpExcludedDataFile.set(File(projectDir, "gradle/japicmp.yaml"))
 }
 
 val createPullRequestNextDevIter by tasks.registering(CreatePullRequest::class) {
     user.set(ghUser)
-    repo.set(zaproxyRepo)
+    repo.set(yaproxyRepo)
     branchName.set("bump-version")
 
     commitSummary.set("Prepare next dev iteration")
@@ -66,13 +66,13 @@ val prepareMainRelease by tasks.registering(PrepareMainRelease::class) {
     securityFile.set(File(rootDir, "SECURITY.md"))
     snapcraftFile.set(File(rootDir, "snap/snapcraft.yaml"))
 
-    oldVersionProperty.set("zap.japicmp.baseversion")
+    oldVersionProperty.set("yap.japicmp.baseversion")
     versionProperty.set("version")
 }
 
 val createPullRequestMainRelease by tasks.registering(CreatePullRequest::class) {
     user.set(ghUser)
-    repo.set(zaproxyRepo)
+    repo.set(yaproxyRepo)
     branchName.set("release")
 
     commitSummary.set("Update version to ${project.version}")
@@ -96,7 +96,7 @@ tasks.register<CreateMainRelease>("createMainRelease") {
     tagMessage.set("Version ${project.version}")
 
     title.set(tagName)
-    body.set("Release notes: https://www.zaproxy.org/docs/desktop/releases/${project.version}/")
+    body.set("Release notes: https://www.yaproxy.org/docs/desktop/releases/${project.version}/")
     checksumAlgorithm.set(checksumAlg)
     draft.set(true)
 
@@ -119,15 +119,15 @@ tasks.register<CreateMainRelease>("createMainRelease") {
                 contentType.set("application/gzip")
             }
             register("linux-installer") {
-                file.set(mapToFile(installersFileTree, "ZAP_${version.toString().replace('.', '_')}_unix.sh"))
+                file.set(mapToFile(installersFileTree, "YAP_${version.toString().replace('.', '_')}_unix.sh"))
                 contentType.set("application/x-shellscript")
             }
             register("windows-installer") {
-                file.set(mapToFile(installersFileTree, "ZAP_${version.toString().replace('.', '_')}_windows.exe"))
+                file.set(mapToFile(installersFileTree, "YAP_${version.toString().replace('.', '_')}_windows.exe"))
                 contentType.set("application/x-ms-dos-executable")
             }
             register("windows32-installer") {
-                file.set(mapToFile(installersFileTree, "ZAP_${version.toString().replace('.', '_')}_windows-x32.exe"))
+                file.set(mapToFile(installersFileTree, "YAP_${version.toString().replace('.', '_')}_windows-x32.exe"))
                 contentType.set("application/x-ms-dos-executable")
             }
         }
@@ -164,11 +164,11 @@ System.getenv("GITHUB_REF")?.let { ref ->
 
     val targetTag = ref.removePrefix("refs/tags/")
 
-    val adminRepo = GitHubRepo("zaproxy", "zap-admin")
+    val adminRepo = GitHubRepo("yaproxy", "yap-admin")
 
     val handleWeeklyRelease by tasks.registering(HandleWeeklyRelease::class) {
         val targetDailyVersion = targetTag.removePrefix("w")
-        downloadUrl.set("https://github.com/zaproxy/zaproxy/releases/download/w$targetDailyVersion/ZAP_WEEKLY_D-$targetDailyVersion.zip")
+        downloadUrl.set("https://github.com/yaproxy/yaproxy/releases/download/w$targetDailyVersion/YAP_WEEKLY_D-$targetDailyVersion.zip")
         checksumAlgorithm.set("SHA-256")
 
         gitHubUser.set(ghUser)

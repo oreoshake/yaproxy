@@ -1,18 +1,18 @@
 # syntax=docker/dockerfile:1
-# This dockerfile builds a ZAP docker image used for integration tests
-FROM ghcr.io/zaproxy/zaproxy:nightly
+# This dockerfile builds a YAP docker image used for integration tests
+FROM ghcr.io/yaproxy/yaproxy:nightly
 LABEL maintainer="psiinon@gmail.com"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-#Change to the zap user so things get done as the right person (apart from copy)
-USER zap
+#Change to the yap user so things get done as the right person (apart from copy)
+USER yap
 
-COPY --link --chown=1000:1000 integration_tests /zap/wrk/
+COPY --link --chown=1000:1000 integration_tests /yap/wrk/
 
 # Pick up any local changes
-COPY --link --chown=1000:1000 zap* CHANGELOG.md /zap/
+COPY --link --chown=1000:1000 yap* CHANGELOG.md /yap/
 
-RUN chmod +x /zap/wrk/*.sh
+RUN chmod +x /yap/wrk/*.sh
 
-WORKDIR /zap
+WORKDIR /yap

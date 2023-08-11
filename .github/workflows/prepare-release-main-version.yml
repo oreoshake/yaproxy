@@ -18,8 +18,8 @@ jobs:
         distribution: 'temurin'
         java-version: 11
     - name: Prepare Release
-      run: ./gradlew :zap:prepareMainRelease
+      run: ./gradlew :yap:prepareMainRelease
     - name: Create Pull Request
       env:
-        ZAPBOT_TOKEN: ${{ secrets.ZAPBOT_TOKEN }}
-      run: ./gradlew :zap:createPullRequestMainRelease
+        YAPBOT_TOKEN: ${{ secrets.YAPBOT_TOKEN }}
+      run: ./gradlew :yap:createPullRequestMainRelease

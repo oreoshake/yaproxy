@@ -1,7 +1,7 @@
-package org.zaproxy.zap
+package org.yaproxy.yap
 
-import org.zaproxy.zap.tasks.JFlexGenerator
-import org.zaproxy.zap.tasks.JFlexToRstaTokenMaker
+import org.yaproxy.yap.tasks.JFlexGenerator
+import org.yaproxy.yap.tasks.JFlexToRstaTokenMaker
 
 val jflexClasspath by configurations.creating
 
@@ -10,7 +10,7 @@ dependencies {
 }
 
 val generateRstaTokenMakers by tasks.registering {
-    group = "ZAP RSTA"
+    group = "YAP RSTA"
     description = "Generates (and copies) all RSTA token makers."
 }
 
@@ -30,7 +30,7 @@ flexRstaTokenMakers.forEach {
         outputDirectory.set(project.layout.buildDirectory.dir("generated/sources/rsta/${tokenMakerName}/"))
     }
     val copyTask = tasks.register<Copy>("generateRsta${tokenMakerName}") {
-        group = "ZAP RSTA"
+        group = "YAP RSTA"
         description = "Generates (and copies) the $tokenMakerName."
 
         from(rstaTask)
@@ -41,4 +41,3 @@ flexRstaTokenMakers.forEach {
         dependsOn(copyTask)
     }
 }
-

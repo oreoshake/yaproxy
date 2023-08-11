@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           sudo apt-get install xmlstarlet
-          echo "REL_VERSION=$(curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml | xmlstarlet sel -t -v //core/version)" >> $GITHUB_ENV
+          echo "REL_VERSION=$(curl -s https://raw.githubusercontent.com/yaproxy/yap-admin/master/YapVersions.xml | xmlstarlet sel -t -v //core/version)" >> $GITHUB_ENV
           echo "REL_DATE=$(date +%F)" >> $GITHUB_ENV
           echo "REL_DATE_SHORT=$(date +%Y%m%d)" >> $GITHUB_ENV
       -
@@ -26,8 +26,8 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v2
         with:
-          username: zapbot
-          password: ${{ secrets.ZAPBOT_DOCKER_TOKEN }}
+          username: yapbot
+          password: ${{ secrets.YAPBOT_DOCKER_TOKEN }}
       -
         name: Login to GitHub Container Registry
         uses: docker/login-action@v2
@@ -35,7 +35,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - 
+      -
         name: Build and push stable Docker image
         uses: docker/build-push-action@v4
         with:
@@ -45,20 +45,20 @@ jobs:
           push: true
           provenance: false
           tags: |
-            owasp/zap2docker-stable:s${{ env.REL_DATE }}
-            owasp/zap2docker-stable:${{ env.REL_VERSION }}
-            owasp/zap2docker-stable:latest
-            ghcr.io/zaproxy/zaproxy:${{ env.REL_DATE_SHORT }}-stable
-            ghcr.io/zaproxy/zaproxy:${{ env.REL_VERSION }}
-            ghcr.io/zaproxy/zaproxy:stable
-            ghcr.io/zaproxy/zaproxy:latest
-            softwaresecurityproject/zap-stable:${{ env.REL_DATE_SHORT }}
-            softwaresecurityproject/zap-stable:${{ env.REL_VERSION }}
-            softwaresecurityproject/zap-stable:latest
+            owasp/yap2docker-stable:s${{ env.REL_DATE }}
+            owasp/yap2docker-stable:${{ env.REL_VERSION }}
+            owasp/yap2docker-stable:latest
+            ghcr.io/yaproxy/yaproxy:${{ env.REL_DATE_SHORT }}-stable
+            ghcr.io/yaproxy/yaproxy:${{ env.REL_VERSION }}
+            ghcr.io/yaproxy/yaproxy:stable
+            ghcr.io/yaproxy/yaproxy:latest
+            softwaresecurityproject/yap-stable:${{ env.REL_DATE_SHORT }}
+            softwaresecurityproject/yap-stable:${{ env.REL_VERSION }}
+            softwaresecurityproject/yap-stable:latest
           secrets: |
             webswing_url=${{ secrets.WEBSWING_URL }}
           outputs: "type=image,name=target,\
-            annotation-index.org.opencontainers.image.source=https://github.com/zaproxy/zaproxy,\
+            annotation-index.org.opencontainers.image.source=https://github.com/yaproxy/yaproxy,\
             annotation-index.org.opencontainers.image.description=The stable Docker image for the world’s most widely used web app scanner.,\
             annotation-index.org.opencontainers.image.licenses=Apache-2.0"
       -
@@ -71,16 +71,16 @@ jobs:
           push: true
           provenance: false
           tags: |
-            owasp/zap2docker-bare:b${{ env.REL_DATE }}
-            owasp/zap2docker-bare:${{ env.REL_VERSION }}
-            owasp/zap2docker-bare:latest
-            ghcr.io/zaproxy/zaproxy:${{ env.REL_DATE_SHORT }}-bare
-            ghcr.io/zaproxy/zaproxy:${{ env.REL_VERSION }}-bare
-            ghcr.io/zaproxy/zaproxy:bare
-            softwaresecurityproject/zap-bare:${{ env.REL_DATE_SHORT }}
-            softwaresecurityproject/zap-bare:${{ env.REL_VERSION }}
-            softwaresecurityproject/zap-bare:latest
+            owasp/yap2docker-bare:b${{ env.REL_DATE }}
+            owasp/yap2docker-bare:${{ env.REL_VERSION }}
+            owasp/yap2docker-bare:latest
+            ghcr.io/yaproxy/yaproxy:${{ env.REL_DATE_SHORT }}-bare
+            ghcr.io/yaproxy/yaproxy:${{ env.REL_VERSION }}-bare
+            ghcr.io/yaproxy/yaproxy:bare
+            softwaresecurityproject/yap-bare:${{ env.REL_DATE_SHORT }}
+            softwaresecurityproject/yap-bare:${{ env.REL_VERSION }}
+            softwaresecurityproject/yap-bare:latest
           outputs: "type=image,name=target,\
-            annotation.org.opencontainers.image.source=https://github.com/zaproxy/zaproxy,\
+            annotation.org.opencontainers.image.source=https://github.com/yaproxy/yaproxy,\
             annotation.org.opencontainers.image.description=The bare Docker image for the world’s most widely used web app scanner.,\
             annotation.org.opencontainers.image.licenses=Apache-2.0"

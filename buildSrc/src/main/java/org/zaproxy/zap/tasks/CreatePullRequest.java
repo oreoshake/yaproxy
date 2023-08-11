@@ -1,9 +1,9 @@
 /*
- * Zed Attack Proxy (ZAP) and its related class files.
+ * Zed Attack Proxy (YAP) and its related class files.
  *
- * ZAP is an HTTP/HTTPS proxy for assessing web application security.
+ * YAP is an HTTP/HTTPS proxy for assessing web application security.
  *
- * Copyright 2021 The ZAP Development Team
+ * Copyright 2021 The YAP Development Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zaproxy.zap.tasks;
+package org.yaproxy.yap.tasks;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,8 +37,8 @@ import org.kohsuke.github.GHIssueState;
 import org.kohsuke.github.GHPullRequest;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
-import org.zaproxy.zap.GitHubRepo;
-import org.zaproxy.zap.GitHubUser;
+import org.yaproxy.yap.GitHubRepo;
+import org.yaproxy.yap.GitHubUser;
 
 /** A task that checks for modifications in a git repo, commits, and creates a pull request. */
 public abstract class CreatePullRequest extends DefaultTask {
@@ -56,7 +56,7 @@ public abstract class CreatePullRequest extends DefaultTask {
         this.baseBranchName =
                 objects.property(String.class).convention(DEFAULT_GIT_BASE_BRANCH_NAME);
 
-        setGroup("ZAP");
+        setGroup("YAP");
         setDescription("Creates a pull request with modifications done in a repo.");
     }
 

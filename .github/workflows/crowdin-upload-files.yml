@@ -16,5 +16,5 @@ jobs:
         java-version: 11
     - name: Upload Files
       env:
-        CROWDIN_AUTH_TOKEN: ${{ secrets.ZAPBOT_CROWDIN_TOKEN }}
-      run: ./gradlew :zap:crowdinUploadSourceFiles
+        CROWDIN_AUTH_TOKEN: ${{ secrets.YAPBOT_CROWDIN_TOKEN }}
+      run: ./gradlew :yap:crowdinUploadSourceFiles

@@ -1,4 +1,4 @@
-package org.zaproxy.zap
+package org.yaproxy.yap
 
 plugins {
     com.diffplug.spotless
@@ -83,36 +83,36 @@ spotless {
                 "src/main/java/org/parosproxy/paros/extension/history/HistoryTable.java",
                 "src/main/java/org/parosproxy/paros/extension/history/PopupMenuResendSites.java",
                 "src/main/java/org/parosproxy/paros/security/CertData.java",
-                "src/main/java/org/zaproxy/**/*.java",
+                "src/main/java/org/yaproxy/**/*.java",
                 "src/test/java/**/*.java"
             ))
             // Different license (e.g. 3rd-party, generated code)
             exclude(listOf(
-                "src/main/java/org/zaproxy/zap/extension/ascan/AllCategoryTableModel.java",
-                "src/main/java/org/zaproxy/zap/extension/ascan/CategoryTableModel.java",
-                "src/main/java/org/zaproxy/zap/extension/ascan/PolicyAllCategoryPanel.java",
-                "src/main/java/org/zaproxy/zap/extension/ascan/PolicyCategoryPanel.java",
-                "src/main/java/org/zaproxy/zap/extension/ascan/PolicyDialog.java",
-                "src/main/java/org/zaproxy/zap/extension/dynssl/DynSSLParam.java",
-                "src/main/java/org/zaproxy/zap/extension/dynssl/DynamicSSLPanel.java",
-                "src/main/java/org/zaproxy/zap/extension/dynssl/DynamicSSLWelcomeDialog.java",
-                "src/main/java/org/zaproxy/zap/extension/dynssl/ExtensionDynSSL.java",
-                "src/main/java/org/zaproxy/zap/extension/dynssl/SslCertificateUtils.java",
-                "src/main/java/org/zaproxy/zap/extension/globalexcludeurl/DialogAddToken.java",
-                "src/main/java/org/zaproxy/zap/extension/globalexcludeurl/DialogModifyToken.java",
-                "src/main/java/org/zaproxy/zap/extension/globalexcludeurl/ExtensionGlobalExcludeURL.java",
-                "src/main/java/org/zaproxy/zap/extension/globalexcludeurl/GlobalExcludeURLParam.java",
-                "src/main/java/org/zaproxy/zap/extension/globalexcludeurl/GlobalExcludeURLParamToken.java",
-                "src/main/java/org/zaproxy/zap/extension/globalexcludeurl/OptionsGlobalExcludeURLPanel.java",
-                "src/main/java/org/zaproxy/zap/extension/globalexcludeurl/OptionsGlobalExcludeURLTableModel.java",
-                "src/main/java/org/zaproxy/zap/extension/httppanel/view/posttable/RequestPostTableModel.java",
-                "src/main/java/org/zaproxy/zap/extension/httppanel/view/syntaxhighlight/lexers/*.java",
-                "src/main/java/org/zaproxy/zap/extension/stats/StatsdClient.java",
-                "src/main/java/org/zaproxy/zap/network/ZapNTLMEngineImpl.java",
-                "src/main/java/org/zaproxy/zap/network/ZapNTLMScheme.java",
-                "src/main/java/org/zaproxy/zap/spider/URLCanonicalizer.java",
-                "src/main/java/org/zaproxy/zap/spider/URLResolver.java",
-                "src/main/java/org/zaproxy/zap/utils/SortedComboBoxModel.java"
+                "src/main/java/org/yaproxy/yap/extension/ascan/AllCategoryTableModel.java",
+                "src/main/java/org/yaproxy/yap/extension/ascan/CategoryTableModel.java",
+                "src/main/java/org/yaproxy/yap/extension/ascan/PolicyAllCategoryPanel.java",
+                "src/main/java/org/yaproxy/yap/extension/ascan/PolicyCategoryPanel.java",
+                "src/main/java/org/yaproxy/yap/extension/ascan/PolicyDialog.java",
+                "src/main/java/org/yaproxy/yap/extension/dynssl/DynSSLParam.java",
+                "src/main/java/org/yaproxy/yap/extension/dynssl/DynamicSSLPanel.java",
+                "src/main/java/org/yaproxy/yap/extension/dynssl/DynamicSSLWelcomeDialog.java",
+                "src/main/java/org/yaproxy/yap/extension/dynssl/ExtensionDynSSL.java",
+                "src/main/java/org/yaproxy/yap/extension/dynssl/SslCertificateUtils.java",
+                "src/main/java/org/yaproxy/yap/extension/globalexcludeurl/DialogAddToken.java",
+                "src/main/java/org/yaproxy/yap/extension/globalexcludeurl/DialogModifyToken.java",
+                "src/main/java/org/yaproxy/yap/extension/globalexcludeurl/ExtensionGlobalExcludeURL.java",
+                "src/main/java/org/yaproxy/yap/extension/globalexcludeurl/GlobalExcludeURLParam.java",
+                "src/main/java/org/yaproxy/yap/extension/globalexcludeurl/GlobalExcludeURLParamToken.java",
+                "src/main/java/org/yaproxy/yap/extension/globalexcludeurl/OptionsGlobalExcludeURLPanel.java",
+                "src/main/java/org/yaproxy/yap/extension/globalexcludeurl/OptionsGlobalExcludeURLTableModel.java",
+                "src/main/java/org/yaproxy/yap/extension/httppanel/view/posttable/RequestPostTableModel.java",
+                "src/main/java/org/yaproxy/yap/extension/httppanel/view/syntaxhighlight/lexers/*.java",
+                "src/main/java/org/yaproxy/yap/extension/stats/StatsdClient.java",
+                "src/main/java/org/yaproxy/yap/network/YapNTLMEngineImpl.java",
+                "src/main/java/org/yaproxy/yap/network/YapNTLMScheme.java",
+                "src/main/java/org/yaproxy/yap/spider/URLCanonicalizer.java",
+                "src/main/java/org/yaproxy/yap/spider/URLResolver.java",
+                "src/main/java/org/yaproxy/yap/utils/SortedComboBoxModel.java"
             ))
         })
     })
@@ -125,10 +125,9 @@ spotless {
         targetExclude(listOf(
             "src/main/java/org/apache/**/*.java",
             "src/main/java/org/parosproxy/paros/network/GenericMethod.java",
-            "src/main/java/org/zaproxy/zap/extension/stats/StatsdClient.java",
-            "src/main/java/org/zaproxy/zap/network/ZapNTLMEngineImpl.java",
-            "src/main/java/org/zaproxy/zap/network/ZapNTLMScheme.java"
+            "src/main/java/org/yaproxy/yap/extension/stats/StatsdClient.java",
+            "src/main/java/org/yaproxy/yap/network/YapNTLMEngineImpl.java",
+            "src/main/java/org/yaproxy/yap/network/YapNTLMScheme.java"
         ))
     }
 }
-

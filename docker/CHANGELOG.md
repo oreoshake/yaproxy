@@ -2,7 +2,7 @@
 All notable changes to the docker containers will be documented in this file.
 
 ### 2023-08-09
-- Install the newer Python ZAP API client directly, `python-owasp-zap-v2.4` was renamed to `zaproxy`.
+- Install the newer Python YAP API client directly, `python-owasp-yap-v2.4` was renamed to `yaproxy`.
 
 ### 2023-08-04
 - The packaged scans, when executed directly, will now use the image from the GitHub Container Registry.
@@ -16,12 +16,12 @@ All notable changes to the docker containers will be documented in this file.
 ### 2023-06-08
 - Start publishing images to the GitHub Container Registry. Use tags instead of image names for various flavours of the
   images; some examples are:
-  - `ghcr.io/zaproxy/zaproxy:20230608-stable` instead of `owasp/zap2docker-stable:s2023-06-08`
-  - `ghcr.io/zaproxy/zaproxy:weekly` instead of `owasp/zap2docker-weekly:latest`
-  - `ghcr.io/zaproxy/zaproxy:nightly` instead of `owasp/zap2docker-live:latest`
+  - `ghcr.io/yaproxy/yaproxy:20230608-stable` instead of `owasp/yap2docker-stable:s2023-06-08`
+  - `ghcr.io/yaproxy/yaproxy:weekly` instead of `owasp/yap2docker-weekly:latest`
+  - `ghcr.io/yaproxy/yaproxy:nightly` instead of `owasp/yap2docker-live:latest`
 
 ### 2023-05-05
- - Do not install/update add-ons if ZAP '-silent' option specified (Issue 4633).
+ - Do not install/update add-ons if YAP '-silent' option specified (Issue 4633).
 
 ### 2023-02-03
  - Alert_on_Unexpected_Content_Types.js > Added Content-Type application/hal+json to the list of expected types.
@@ -33,16 +33,16 @@ All notable changes to the docker containers will be documented in this file.
 - Rework Docker build files to not leave cached files and to not do unnecessary work.
 
 ### 2022-12-16
- - Changed the UID and GID of the `zap` user to 1000 (Issue 7655).
+ - Changed the UID and GID of the `yap` user to 1000 (Issue 7655).
 
 ### 2022-12-05
  - Changed all images to use debian:bullseye-slim instead of unstable-slim.
 
 ### 2022-11-07
- - Updated packaged scans to use full path to `zap-x.sh`.
+ - Updated packaged scans to use full path to `yap-x.sh`.
 
 ### 2022-11-04
-  - Fixed `zap-x.sh` to return the exit code from `zap.sh` instead of `rm -f`
+  - Fixed `yap-x.sh` to return the exit code from `yap.sh` instead of `rm -f`
 
 ### 2022-10-27
  - Updated to use Webswing 22.2
@@ -50,15 +50,15 @@ All notable changes to the docker containers will be documented in this file.
 ### 2022-10-07
  - Changed stable image to use debian:unstable-slim.
  - Changed bare image to use eclipse-temurin:11-jre-alpine.
- - Removed zap-cli from stable.
+ - Removed yap-cli from stable.
  - Updated to use Webswing 22.1.5.
  - Alert_on_Unexpected_Content_Types.js > Added Content-Type application/x-ndjson to the list of expected types.
 
 ### 2022-09-28
- - Removed zap-cli from weekly/live.
+ - Removed yap-cli from weekly/live.
 
 ### 2022-09-27
- - Fixed problem where python-owasp-zap-v2.4 was getting an older version.
+ - Fixed problem where python-owasp-yap-v2.4 was getting an older version.
  - Use curl for the weekly/live health checks.
 
 ### 2022-09-26
@@ -75,7 +75,7 @@ All notable changes to the docker containers will be documented in this file.
 
 ### 2022-08-05
  - Alert_on_Unexpected_Content_Types.js > Added Content-Type text/plain to the list of expected types.
- 
+
 ### 2022-07-30
  - Updated to use Webswing 22.1.3.
 
@@ -98,7 +98,7 @@ All notable changes to the docker containers will be documented in this file.
  - Updated to use Webswing 21.2.4
 
 ### 2021-11-03
- - Fixed issue with automation updates by install updates in a separate ZAP inline call.
+ - Fixed issue with automation updates by install updates in a separate YAP inline call.
 
 ### 2021-10-08
  - Changed the packaged scans to always update all add-ons on start up to avoid a bug in the automation framework breaking plans
@@ -113,7 +113,7 @@ All notable changes to the docker containers will be documented in this file.
  - Updated to use Webswing 21.1.5
 
 ### 2021-09-15
- - Added /zap/container file to make it easier to detect if we are running in a container like docker.
+ - Added /yap/container file to make it easier to detect if we are running in a container like docker.
 
 ### 2021-08-11
  - Changed to enable integration tests, inc enabling the AF for the baseline `-c` option if the `--auto` flag is used before it.
@@ -138,12 +138,12 @@ All notable changes to the docker containers will be documented in this file.
  - Check if messages being analyzed by API scan scripts are globally excluded or not.
 
 ### 2021-02-01
- - Allow more flexibility to specify ZAP command line options when using Webswing:
+ - Allow more flexibility to specify YAP command line options when using Webswing:
   - The default options stay as `-host 0.0.0.0 -port 8090` unless
-  - You specify an env var `ZAP_WEBSWING_OPTS` in which case that replaces the defaults
-  - If not then if a `/zap/wrk/owasp_zap_root_ca.key` file exists then this is loaded as the ZAP root cert
-  - If not then if the `/zap/wrk` is writable then ZAP will output the public and private ZAP cert into that directory
-  
+  - You specify an env var `YAP_WEBSWING_OPTS` in which case that replaces the defaults
+  - If not then if a `/yap/wrk/owasp_yap_root_ca.key` file exists then this is loaded as the YAP root cert
+  - If not then if the `/yap/wrk` is writable then YAP will output the public and private YAP cert into that directory
+
 ### 2021-01-19
  - Python 3.5 is no longer supported.
 
@@ -162,19 +162,19 @@ All notable changes to the docker containers will be documented in this file.
 
 ### 2020-11-27
  - Move logging level of Params from `info` to `debug`, as it can contain sensitive data when authenticated scans are run.
- 
+
 ### 2020-11-24
  - Add support for authenticated scans.
 
 ### 2020-11-19
- - Add zap_tune function (disable all tags and limit pscan alerts to 10), zap_tuned hook and disable recovery log.
+ - Add yap_tune function (disable all tags and limit pscan alerts to 10), yap_tuned hook and disable recovery log.
 
 ### 2020-11-16
- - Update zap-api-scan.py to add support for GraphQL.
+ - Update yap-api-scan.py to add support for GraphQL.
 
 ### 2020-10-13
  - Alert_on_Unexpected_Content_Types.js > Added Content-Type application/health+json to the list of expected types.
- 
+
 ### 2020-09-18
  - Fail immediately if the spider scans were not started to provide better error message.
 
@@ -203,7 +203,7 @@ All notable changes to the docker containers will be documented in this file.
 - Add `application/vnd.api+json` to the list of expected API content types.
 
 ### 2020-04-08
-- Changed zap-full-scan.py and zap-api-scan.py to include the -I option to ignore only warning used by zap-baseline-scan.py
+- Changed yap-full-scan.py and yap-api-scan.py to include the -I option to ignore only warning used by yap-baseline-scan.py
 
 ### 2020-04-06
 - Make API scan policy available to the root user, otherwise it would fail to start the active scan.
@@ -212,20 +212,20 @@ All notable changes to the docker containers will be documented in this file.
 - Changed live and weekly images to use Java 11.
 
 ### 2020-02-21
- - Changed zap-full-scan.py, zap-api-scan.py, and zap-baseline-scan.py to include the missing check for markdown file.
+ - Changed yap-full-scan.py, yap-api-scan.py, and yap-baseline-scan.py to include the missing check for markdown file.
 
 ### 2020-02-07
- - Change zap-full-scan.py and zap-api-scan.py to be Python3 compatible
+ - Change yap-full-scan.py and yap-api-scan.py to be Python3 compatible
 
 ### 2020-01-22
  - Change `live`, `stable`, and `weekly` images to set the locale and lang to `C.UTF-8`,
- to improve interoperability with Python 3 (e.g. `zap-cli`).
+ to improve interoperability with Python 3 (e.g. `yap-cli`).
 
 ### 2019-10-16
  - Added response code after each URL reported on standard out:
 
 ```
-WARN-NEW: Web Browser XSS Protection Not Enabled [10016] x 4 
+WARN-NEW: Web Browser XSS Protection Not Enabled [10016] x 4
 	https://www.example.com/ (200 OK)
 	https://www.example.com/robots.txt (404 Not Found)
 	https://www.example.com (200 OK)
@@ -233,13 +233,13 @@ WARN-NEW: Web Browser XSS Protection Not Enabled [10016] x 4
 ```
 
 ### 2019-10-01
- - Added Python3 and the pip3 version of ZAP in preparation for Python 2 EOL: https://www.python.org/dev/peps/pep-0373/
+ - Added Python3 and the pip3 version of YAP in preparation for Python 2 EOL: https://www.python.org/dev/peps/pep-0373/
 
 ### 2019-09-05
- - Changed zap-full-scan.py to ignore example ascan rules
+ - Changed yap-full-scan.py to ignore example ascan rules
 
 ### 2019-06-18
- - Changed zap-full-scan.py to always include the active scan beta rules
- - Changed zap-full-scan.py to include the active scan alpha rules when the -a switch is used
- - Fixed ownership of all files in the /zap directory
+ - Changed yap-full-scan.py to always include the active scan beta rules
+ - Changed yap-full-scan.py to include the active scan alpha rules when the -a switch is used
+ - Fixed ownership of all files in the /yap directory
  - Added this changelog

@@ -1,9 +1,9 @@
 /*
- * Zed Attack Proxy (ZAP) and its related class files.
+ * Zed Attack Proxy (YAP) and its related class files.
  *
- * ZAP is an HTTP/HTTPS proxy for assessing web application security.
+ * YAP is an HTTP/HTTPS proxy for assessing web application security.
  *
- * Copyright 2022 The ZAP Development Team
+ * Copyright 2022 The YAP Development Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zaproxy.zap.tasks.internal;
+package org.yaproxy.yap.tasks.internal;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -44,22 +44,22 @@ public final class Utils {
 
     private Utils() {}
 
-    public static Map<String, MarketplaceAddOn> getZapVersionsAddOns(Path zapVersionsFile)
+    public static Map<String, MarketplaceAddOn> getYapVersionsAddOns(Path yapVersionsFile)
             throws IOException {
-        XMLConfiguration zapVersionsXml = new ZapXmlConfiguration();
+        XMLConfiguration yapVersionsXml = new YapXmlConfiguration();
         try {
-            zapVersionsXml.load(zapVersionsFile.toFile());
+            yapVersionsXml.load(yapVersionsFile.toFile());
         } catch (ConfigurationException e) {
             throw new IOException(e);
         }
 
         Map<String, MarketplaceAddOn> addOns = new HashMap<>();
-        Stream.of(zapVersionsXml.getStringArray(ADD_ON_ELEMENT))
+        Stream.of(yapVersionsXml.getStringArray(ADD_ON_ELEMENT))
                 .forEach(
                         id -> {
                             String key = ADD_ON_NODE_PREFIX + id;
-                            String url = zapVersionsXml.getString(key + ".url");
-                            String hash = zapVersionsXml.getString(key + ".hash");
+                            String url = yapVersionsXml.getString(key + ".url");
+                            String hash = yapVersionsXml.getString(key + ".hash");
                             addOns.put(id, new MarketplaceAddOn(id, url, hash));
                         });
 

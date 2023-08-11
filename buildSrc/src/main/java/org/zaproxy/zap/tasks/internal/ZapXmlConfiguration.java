@@ -1,9 +1,9 @@
 /*
- * Zed Attack Proxy (ZAP) and its related class files.
+ * Zed Attack Proxy (YAP) and its related class files.
  *
- * ZAP is an HTTP/HTTPS proxy for assessing web application security.
+ * YAP is an HTTP/HTTPS proxy for assessing web application security.
  *
- * Copyright 2022 The ZAP Development Team
+ * Copyright 2022 The YAP Development Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zaproxy.zap.tasks.internal;
+package org.yaproxy.yap.tasks.internal;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,11 +29,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class ZapXmlConfiguration extends XMLConfiguration {
+public class YapXmlConfiguration extends XMLConfiguration {
 
     private static final long serialVersionUID = -8598525138011232529L;
 
-    public ZapXmlConfiguration() {
+    public YapXmlConfiguration() {
         super();
 
         super.setEncoding("UTF-8");

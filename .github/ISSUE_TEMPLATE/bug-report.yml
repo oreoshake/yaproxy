@@ -1,12 +1,12 @@
 name: Bug Report
-description: Report a bug impacting ZAP.
+description: Report a bug impacting YAP.
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to report a ZAP bug! Fill out the form below to provide us with info to help fix the bug. 
-        Only use this if you're 100% sure you've found a bug and can reproduce it. If you're looking for general help with ZAP, try the [User Group](https://groups.google.com/g/zaproxy-users).
+        Thanks for taking the time to report a YAP bug! Fill out the form below to provide us with info to help fix the bug.
+        Only use this if you're 100% sure you've found a bug and can reproduce it. If you're looking for general help with YAP, try the [User Group](https://groups.google.com/g/yaproxy-users).
         Please do not ask questions as issues - these will be closed.
   - type: textarea
     id: description
@@ -39,8 +39,8 @@ body:
     attributes:
       label: Software versions
       description: |
-        Please add version information from ZAPs menu Help > Support Info, or from the CLI using the -suppinfo switch
-        
+        Please add version information from YAPs menu Help > Support Info, or from the CLI using the -suppinfo switch
+
         **Note:** If you're reporting a docker issue please ensure you include the image id.
         Also please be aware that if you've wrapped or customized the image it is very difficult for us to support you.
     validations:
@@ -58,10 +58,10 @@ body:
   - type: textarea
     id: logs
     attributes:
-      label: Errors from the zap.log file
+      label: Errors from the yap.log file
       description: |
-        See https://www.zaproxy.org/faq/what-is-the-default-directory-that-zap-uses/ for the location of the zap.log file for your OS.
-        
+        See https://www.yaproxy.org/faq/what-is-the-default-directory-that-yap-uses/ for the location of the yap.log file for your OS.
+
         Tip: You can attach files by clicking this area to highlight it and then dragging files in.
     validations:
       required: false

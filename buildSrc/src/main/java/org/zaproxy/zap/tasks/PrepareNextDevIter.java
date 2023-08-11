@@ -1,9 +1,9 @@
 /*
- * Zed Attack Proxy (ZAP) and its related class files.
+ * Zed Attack Proxy (YAP) and its related class files.
  *
- * ZAP is an HTTP/HTTPS proxy for assessing web application security.
+ * YAP is an HTTP/HTTPS proxy for assessing web application security.
  *
- * Copyright 2021 The ZAP Development Team
+ * Copyright 2021 The YAP Development Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zaproxy.zap.tasks;
+package org.yaproxy.yap.tasks;
 
 import com.github.zafarkhaja.semver.Version;
 import java.io.File;
@@ -27,11 +27,11 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
-import org.zaproxy.zap.tasks.internal.JapicmpExcludedData;
-import org.zaproxy.zap.tasks.internal.ProjectProperties;
-import org.zaproxy.zap.tasks.internal.Utils;
+import org.yaproxy.yap.tasks.internal.JapicmpExcludedData;
+import org.yaproxy.yap.tasks.internal.ProjectProperties;
+import org.yaproxy.yap.tasks.internal.Utils;
 
-/** A task that prepares the next development iteration of ZAP. */
+/** A task that prepares the next development iteration of YAP. */
 public abstract class PrepareNextDevIter extends DefaultTask {
 
     @Input

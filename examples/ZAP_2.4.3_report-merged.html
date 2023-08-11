@@ -1,11 +1,11 @@
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ZAP Scanning Report</title>
+<title>YAP Scanning Report</title>
 </head>
 <body text="#000000">
 <p>
-<strong>ZAP Scanning Report</strong>
+<strong>YAP Scanning Report</strong>
 </p>
 <p>
 
@@ -15,8 +15,8 @@
 </p>
 <table width="45%" border="0">
 <tr bgcolor="#666666">
-<td width="45%" height="24"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Risk 
-      Level</font></strong></td><td width="55%" align="center"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Number 
+<td width="45%" height="24"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Risk
+      Level</font></strong></td><td width="55%" align="center"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Number
       of Alerts</font></strong></td>
 </tr>
 <tr bgcolor="#e8e8e8">
@@ -39,15 +39,15 @@
 </p>
 <p></p>
 <table width="100%" border="0">
-  
-  
+
+
 <tr bgcolor="red" height="24">
 <td width="20%" valign="top"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"><a name="high"></a>High (Medium)</font></strong></td><td width="80%"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Cross Site Scripting (Reflected)</font></strong></td>
 </tr>
-  
-  
-  
-  
+
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Description</p>
@@ -56,9 +56,9 @@
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -70,7 +70,7 @@
 <p>http://localhost:8080/bodgeit/search.jsp?q=%3C%2Ffont%3E%3Cscript%3Ealert%281%29%3B%3C%2Fscript%3E%3Cfont%3E</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -82,7 +82,7 @@
 <p>q</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -94,7 +94,7 @@
 <p>&lt;/font&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;font&gt;</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -106,9 +106,9 @@
 <p>&lt;/font&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;font&gt;</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Instances</p>
@@ -116,19 +116,19 @@
 <p>1</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Solution</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>Examples of libraries and frameworks that make it easier to generate properly encoded output include Microsoft's Anti-XSS library, the OWASP ESAPI Encoding module, and Apache Wicket.</p><p></p><p>Phases: Implementation; Architecture and Design</p><p>Understand the context in which your data will be used and the encoding that will be expected. This is especially important when transmitting data between different components, or when generating outputs that can contain multiple encodings at the same time, such as web pages or multi-part mail messages. Study all expected communication protocols and data representations to determine the required encoding strategies.</p><p>For any data that will be output to another web page, especially any data that was received from external inputs, use the appropriate encoding on all non-alphanumeric characters.</p><p>Consult the XSS Prevention Cheat Sheet for more details on the types of encoding and escaping that are needed.</p><p></p><p>Phase: Architecture and Design</p><p>For any security checks that are performed on the client side, ensure that these checks are duplicated on the server side, in order to avoid CWE-602. Attackers can bypass the client-side checks by modifying values after the checks have been performed, or by changing the client to remove the client-side checks entirely. Then, these modified values would be submitted to the server.</p><p></p><p>If available, use structured mechanisms that automatically enforce the separation between data and code. These mechanisms may be able to provide the relevant quoting, encoding, and validation automatically, instead of relying on the developer to provide this capability at every point where output is generated.</p><p></p><p>Phase: Implementation</p><p>For every web page that is generated, use and specify a character encoding such as ISO-8859-1 or UTF-8. When an encoding is not specified, the web browser may choose a different encoding by guessing which encoding is actually being used by the web page. This can cause the web browser to treat certain sequences as special, opening up the client to subtle XSS attacks. See CWE-116 for more mitigations related to encoding/escaping.</p><p></p><p>To help mitigate XSS attacks against the user's session cookie, set the session cookie to be HttpOnly. In browsers that support the HttpOnly feature (such as more recent versions of Internet Explorer and Firefox), this attribute can prevent the user's session cookie from being accessible to malicious client-side scripts that use document.cookie. This is not a complete solution, since HttpOnly is not supported by all browsers. More importantly, XMLHTTPRequest and other powerful browser technologies provide read access to HTTP headers, including the Set-Cookie header in which the HttpOnly flag is set.</p><p></p><p>Assume all input is malicious. Use an "accept known good" input validation strategy, i.e., use a whitelist of acceptable inputs that strictly conform to specifications. Reject any input that does not strictly conform to specifications, or transform it into something that does. Do not rely exclusively on looking for malicious or malformed inputs (i.e., do not rely on a blacklist). However, blacklists can be useful for detecting potential attacks or determining which inputs are so malformed that they should be rejected outright.</p><p></p><p>When performing input validation, consider all potentially relevant properties, including length, type of input, the full range of acceptable values, missing or extra inputs, syntax, consistency across related fields, and conformance to business rules. As an example of business rule logic, "boat" may be syntactically valid because it only contains alphanumeric characters, but it is not valid if you are expecting colors such as "red" or "blue."</p><p></p><p>Ensure that you perform input validation at well-defined interfaces within the application. This will help protect the application even if a component is reused or moved elsewhere.</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Reference</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>http://projects.webappsec.org/Cross-Site-Scripting</p><p>http://cwe.mitre.org/data/definitions/79.html</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>CWE Id</p>
@@ -136,7 +136,7 @@
 <p>79</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>WASC Id</p>
@@ -148,15 +148,15 @@
 </table>
 <p></p>
 <table width="100%" border="0">
-  
-  
+
+
 <tr bgcolor="red" height="24">
 <td width="20%" valign="top"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"><a name="high"></a>High (Medium)</font></strong></td><td width="80%"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">SQL Injection</font></strong></td>
 </tr>
-  
-  
-  
-  
+
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Description</p>
@@ -165,9 +165,9 @@
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -179,7 +179,7 @@
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -191,7 +191,7 @@
 <p>productid</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -203,9 +203,9 @@
 <p>5-2</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Instances</p>
@@ -213,13 +213,13 @@
 <p>1</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Solution</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>Do not trust client side input, even if there is client side validation in place.  </p><p>In general, type check all data on the server side.</p><p>If the application uses JDBC, use PreparedStatement or CallableStatement, with parameters passed by '?'</p><p>If the application uses ASP, use ADO Command Objects with strong type checking and parameterized queries.</p><p>If database Stored Procedures can be used, use them.</p><p>Do *not* concatenate strings into queries in the stored procedure, or use 'exec', 'exec immediate', or equivalent functionality!</p><p>Do not create dynamic SQL queries using simple string concatenation.</p><p>Escape all data received from the client.</p><p>Apply a 'whitelist' of allowed characters, or a 'blacklist' of disallowed characters in user input.</p><p>Apply the principle of least privilege by using the least privileged database user possible.</p><p>In particular, avoid using the 'sa' or 'db-owner' database users. This does not eliminate SQL injection, but minimizes its impact.</p><p>Grant the minimum database access that is necessary for the application.</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Other information</p>
@@ -230,13 +230,13 @@
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Reference</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>https://www.owasp.org/index.php/Top_10_2010-A1</p><p>https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>CWE Id</p>
@@ -244,7 +244,7 @@
 <p>89</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>WASC Id</p>
@@ -256,15 +256,15 @@
 </table>
 <p></p>
 <table width="100%" border="0">
-  
-  
+
+
 <tr bgcolor="orange" height="24">
 <td width="20%" valign="top"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"><a name="medium"></a>Medium (Medium)</font></strong></td><td width="80%"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">X-Frame-Options Header Not Set</font></strong></td>
 </tr>
-  
-  
-  
-  
+
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Description</p>
@@ -273,9 +273,9 @@
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -287,9 +287,9 @@
 <p>http://localhost:8080/bodgeit</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -301,9 +301,9 @@
 <p>http://localhost:8080/robots.txt</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -315,9 +315,9 @@
 <p>http://localhost:8080/sitemap.xml</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -329,9 +329,9 @@
 <p>http://localhost:8080/bodgeit/</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -343,9 +343,9 @@
 <p>http://localhost:8080/bodgeit/home.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -357,9 +357,9 @@
 <p>http://localhost:8080/bodgeit/about.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -371,9 +371,9 @@
 <p>http://localhost:8080/bodgeit/login.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -385,9 +385,9 @@
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -399,9 +399,9 @@
 <p>http://localhost:8080/bodgeit/search.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -413,9 +413,9 @@
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=6</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -427,9 +427,9 @@
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=5</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -441,9 +441,9 @@
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=3</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -455,9 +455,9 @@
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=2</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -469,9 +469,9 @@
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=7</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -483,9 +483,9 @@
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=4</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -497,9 +497,9 @@
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=1</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -511,9 +511,9 @@
 <p>http://localhost:8080/bodgeit/product.jsp?prodid=21</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -525,9 +525,9 @@
 <p>http://localhost:8080/bodgeit/contact.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -539,9 +539,9 @@
 <p>http://localhost:8080/bodgeit/product.jsp?prodid=7</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -553,9 +553,9 @@
 <p>http://localhost:8080/bodgeit/product.jsp?prodid=14</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Instances</p>
@@ -563,13 +563,13 @@
 <p>58</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Solution</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Other information</p>
@@ -580,7 +580,7 @@
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Reference</p>
@@ -590,15 +590,15 @@
 </table>
 <p></p>
 <table width="100%" border="0">
-  
-  
+
+
 <tr bgcolor="orange" height="24">
 <td width="20%" valign="top"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"><a name="medium"></a>Medium (Medium)</font></strong></td><td width="80%"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Application Error Disclosure</font></strong></td>
 </tr>
-  
-  
-  
-  
+
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Description</p>
@@ -607,9 +607,9 @@
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -621,7 +621,7 @@
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -633,7 +633,7 @@
 <p>N/A</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -645,9 +645,9 @@
 <p>HTTP 500 Internal server error</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Instances</p>
@@ -655,19 +655,19 @@
 <p>1</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Solution</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Reference</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p></p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>CWE Id</p>
@@ -675,7 +675,7 @@
 <p>200</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>WASC Id</p>
@@ -687,15 +687,15 @@
 </table>
 <p></p>
 <table width="100%" border="0">
-  
-  
+
+
 <tr bgcolor="orange" height="24">
 <td width="20%" valign="top"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"><a name="medium"></a>Medium (Medium)</font></strong></td><td width="80%"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Buffer Overflow</font></strong></td>
 </tr>
-  
-  
-  
-  
+
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Description</p>
@@ -704,9 +704,9 @@
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -718,7 +718,7 @@
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -730,7 +730,7 @@
 <p>product</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -751,9 +751,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -765,7 +765,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -777,7 +777,7 @@ Host: localhost:8080
 <p>price</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -798,9 +798,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -812,7 +812,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -824,7 +824,7 @@ Host: localhost:8080
 <p>description</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -845,9 +845,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -859,7 +859,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -871,7 +871,7 @@ Host: localhost:8080
 <p>quantity</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -892,9 +892,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -906,7 +906,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -918,7 +918,7 @@ Host: localhost:8080
 <p>type</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -939,9 +939,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -953,7 +953,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -965,7 +965,7 @@ Host: localhost:8080
 <p>q</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -986,9 +986,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1000,7 +1000,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1012,7 +1012,7 @@ Host: localhost:8080
 <p>quantity_7</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1033,9 +1033,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1047,7 +1047,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1059,7 +1059,7 @@ Host: localhost:8080
 <p>quantity_21</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1080,9 +1080,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1094,7 +1094,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1106,7 +1106,7 @@ Host: localhost:8080
 <p>quantity_14</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1127,9 +1127,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1141,7 +1141,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1153,7 +1153,7 @@ Host: localhost:8080
 <p>quantity_28</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1174,9 +1174,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1188,7 +1188,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1200,7 +1200,7 @@ Host: localhost:8080
 <p>quantity_22</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1221,9 +1221,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1235,7 +1235,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1247,7 +1247,7 @@ Host: localhost:8080
 <p>quantity_23</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1268,9 +1268,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1282,7 +1282,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1294,7 +1294,7 @@ Host: localhost:8080
 <p>quantity_30</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1315,9 +1315,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1329,7 +1329,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1341,7 +1341,7 @@ Host: localhost:8080
 <p>quantity_1</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1362,9 +1362,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1376,7 +1376,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1388,7 +1388,7 @@ Host: localhost:8080
 <p>quantity_19</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1409,9 +1409,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1423,7 +1423,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1435,7 +1435,7 @@ Host: localhost:8080
 <p>quantity_25</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1456,9 +1456,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1470,7 +1470,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1482,7 +1482,7 @@ Host: localhost:8080
 <p>quantity_9</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1503,9 +1503,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1517,7 +1517,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1529,7 +1529,7 @@ Host: localhost:8080
 <p>quantity_2</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1550,9 +1550,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1564,7 +1564,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1576,7 +1576,7 @@ Host: localhost:8080
 <p>quantity_18</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1597,9 +1597,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1611,7 +1611,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1623,7 +1623,7 @@ Host: localhost:8080
 <p>quantity_10</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1644,9 +1644,9 @@ Host: localhost:8080
 </p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Instances</p>
@@ -1654,13 +1654,13 @@ Host: localhost:8080
 <p>33</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Solution</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>Rewrite the background program using proper return length checking.  This will require a recompile of the background executable.</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Other information</p>
@@ -1671,13 +1671,13 @@ Host: localhost:8080
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Reference</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>https://www.owasp.org/index.php/Buffer_overflow_attack</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>CWE Id</p>
@@ -1685,7 +1685,7 @@ Host: localhost:8080
 <p>120</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>WASC Id</p>
@@ -1697,15 +1697,15 @@ Host: localhost:8080
 </table>
 <p></p>
 <table width="100%" border="0">
-  
-  
+
+
 <tr bgcolor="orange" height="24">
 <td width="20%" valign="top"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"><a name="medium"></a>Medium (Medium)</font></strong></td><td width="80%"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Format String Error</font></strong></td>
 </tr>
-  
-  
-  
-  
+
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Description</p>
@@ -1714,9 +1714,9 @@ Host: localhost:8080
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1728,7 +1728,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1740,7 +1740,7 @@ Host: localhost:8080
 <p>product</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1749,12 +1749,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1766,7 +1766,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1778,7 +1778,7 @@ Host: localhost:8080
 <p>price</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1787,12 +1787,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1804,7 +1804,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1816,7 +1816,7 @@ Host: localhost:8080
 <p>description</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1825,12 +1825,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1842,7 +1842,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1854,7 +1854,7 @@ Host: localhost:8080
 <p>quantity</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1863,12 +1863,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1880,7 +1880,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1892,7 +1892,7 @@ Host: localhost:8080
 <p>type</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1901,12 +1901,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1918,7 +1918,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/advanced.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1930,7 +1930,7 @@ Host: localhost:8080
 <p>q</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1939,12 +1939,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1956,7 +1956,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1968,7 +1968,7 @@ Host: localhost:8080
 <p>quantity_7</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1977,12 +1977,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -1994,7 +1994,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2006,7 +2006,7 @@ Host: localhost:8080
 <p>quantity_21</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2015,12 +2015,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2032,7 +2032,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2044,7 +2044,7 @@ Host: localhost:8080
 <p>quantity_14</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2053,12 +2053,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2070,7 +2070,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2082,7 +2082,7 @@ Host: localhost:8080
 <p>quantity_28</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2091,12 +2091,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2108,7 +2108,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2120,7 +2120,7 @@ Host: localhost:8080
 <p>quantity_22</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2129,12 +2129,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2146,7 +2146,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2158,7 +2158,7 @@ Host: localhost:8080
 <p>quantity_30</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2167,12 +2167,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2184,7 +2184,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2196,7 +2196,7 @@ Host: localhost:8080
 <p>quantity_23</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2205,12 +2205,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2222,7 +2222,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2234,7 +2234,7 @@ Host: localhost:8080
 <p>quantity_1</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2243,12 +2243,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2260,7 +2260,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2272,7 +2272,7 @@ Host: localhost:8080
 <p>quantity_19</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2281,12 +2281,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2298,7 +2298,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2310,7 +2310,7 @@ Host: localhost:8080
 <p>quantity_25</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2319,12 +2319,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2336,7 +2336,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2348,7 +2348,7 @@ Host: localhost:8080
 <p>quantity_9</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2357,12 +2357,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2374,7 +2374,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2386,7 +2386,7 @@ Host: localhost:8080
 <p>quantity_18</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2395,12 +2395,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2412,7 +2412,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2424,7 +2424,7 @@ Host: localhost:8080
 <p>quantity_2</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2433,12 +2433,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2450,7 +2450,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2462,7 +2462,7 @@ Host: localhost:8080
 <p>quantity_10</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2471,12 +2471,12 @@ Host: localhost:8080
 </font>
 </blockquote>
 </td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif">
-<p>ZAP</p>
+<p>YAP</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Instances</p>
@@ -2484,13 +2484,13 @@ Host: localhost:8080
 <p>33</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Solution</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Other information</p>
@@ -2501,13 +2501,13 @@ Host: localhost:8080
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Reference</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>https://www.owasp.org/index.php/Format_string_attack</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>CWE Id</p>
@@ -2515,7 +2515,7 @@ Host: localhost:8080
 <p>134</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>WASC Id</p>
@@ -2527,15 +2527,15 @@ Host: localhost:8080
 </table>
 <p></p>
 <table width="100%" border="0">
-  
-  
+
+
 <tr bgcolor="yellow" height="24">
 <a name="low"></a><td width="20%" valign="top"><strong><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">Low (Medium)</font></strong></td><td width="80%"><strong><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">Web Browser XSS Protection Not Enabled</font></strong></td>
 </tr>
-  
-  
-  
-  
+
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Description</p>
@@ -2544,9 +2544,9 @@ Host: localhost:8080
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2558,9 +2558,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2572,9 +2572,9 @@ Host: localhost:8080
 <p>http://localhost:8080/robots.txt</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2586,9 +2586,9 @@ Host: localhost:8080
 <p>http://localhost:8080/sitemap.xml</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2600,9 +2600,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2614,9 +2614,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/home.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2628,9 +2628,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/about.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2642,9 +2642,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/login.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2656,9 +2656,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2670,9 +2670,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/search.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2684,9 +2684,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=6</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2698,9 +2698,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=5</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2712,9 +2712,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=3</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2726,9 +2726,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=2</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2740,9 +2740,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=7</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2754,9 +2754,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=4</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2768,9 +2768,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=1</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2782,9 +2782,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?prodid=21</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2796,9 +2796,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/contact.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2810,9 +2810,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?prodid=7</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2824,9 +2824,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?prodid=14</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Instances</p>
@@ -2834,13 +2834,13 @@ Host: localhost:8080
 <p>58</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Solution</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Other information</p>
@@ -2851,13 +2851,13 @@ Host: localhost:8080
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Reference</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet</p><p>https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>CWE Id</p>
@@ -2865,7 +2865,7 @@ Host: localhost:8080
 <p>933</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>WASC Id</p>
@@ -2877,15 +2877,15 @@ Host: localhost:8080
 </table>
 <p></p>
 <table width="100%" border="0">
-  
-  
+
+
 <tr bgcolor="yellow" height="24">
 <a name="low"></a><td width="20%" valign="top"><strong><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">Low (Medium)</font></strong></td><td width="80%"><strong><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">X-Content-Type-Options Header Missing</font></strong></td>
 </tr>
-  
-  
-  
-  
+
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Description</p>
@@ -2894,9 +2894,9 @@ Host: localhost:8080
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2908,9 +2908,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2922,9 +2922,9 @@ Host: localhost:8080
 <p>http://localhost:8080/robots.txt</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2936,9 +2936,9 @@ Host: localhost:8080
 <p>http://localhost:8080/sitemap.xml</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2950,9 +2950,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2964,9 +2964,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/home.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2978,9 +2978,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/about.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -2992,9 +2992,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/login.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3006,9 +3006,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3020,9 +3020,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/search.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3034,9 +3034,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=6</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3048,9 +3048,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=5</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3062,9 +3062,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=3</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3076,9 +3076,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=2</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3090,9 +3090,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=7</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3104,9 +3104,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=4</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3118,9 +3118,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?typeid=1</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3132,9 +3132,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?prodid=21</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3146,9 +3146,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/contact.jsp</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3160,9 +3160,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?prodid=7</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3174,9 +3174,9 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/product.jsp?prodid=14</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Instances</p>
@@ -3184,13 +3184,13 @@ Host: localhost:8080
 <p>58</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Solution</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Other information</p>
@@ -3201,13 +3201,13 @@ Host: localhost:8080
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Reference</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx</p><p>https://www.owasp.org/index.php/List_of_useful_HTTP_headers</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>WASC Id</p>
@@ -3219,15 +3219,15 @@ Host: localhost:8080
 </table>
 <p></p>
 <table width="100%" border="0">
-  
-  
+
+
 <tr bgcolor="yellow" height="24">
 <a name="low"></a><td width="20%" valign="top"><strong><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">Low (Medium)</font></strong></td><td width="80%"><strong><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">Password Autocomplete in browser</font></strong></td>
 </tr>
-  
-  
-  
-  
+
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Description</p>
@@ -3236,9 +3236,9 @@ Host: localhost:8080
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3250,7 +3250,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/login.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3262,7 +3262,7 @@ Host: localhost:8080
 <p>input</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3274,9 +3274,9 @@ Host: localhost:8080
 <p>&lt;input id="password" name="password" type="password"&gt;</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3288,7 +3288,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/register.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3300,7 +3300,7 @@ Host: localhost:8080
 <p>input</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3312,9 +3312,9 @@ Host: localhost:8080
 <p>&lt;input id="password1" name="password1" type="password"&gt;</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Instances</p>
@@ -3322,19 +3322,19 @@ Host: localhost:8080
 <p>2</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Solution</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>Turn off AUTOCOMPLETE attribute in form or individual input elements containing password by using AUTOCOMPLETE='OFF'</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Reference</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>http://msdn.microsoft.com/library/default.asp?url=/workshop/author/forms/autocomplete_ovr.asp</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>CWE Id</p>
@@ -3346,15 +3346,15 @@ Host: localhost:8080
 </table>
 <p></p>
 <table width="100%" border="0">
-  
-  
+
+
 <tr bgcolor="yellow" height="24">
 <a name="low"></a><td width="20%" valign="top"><strong><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">Low (Medium)</font></strong></td><td width="80%"><strong><font color="#000000" size="2" face="Arial, Helvetica, sans-serif">Cookie set without HttpOnly flag</font></strong></td>
 </tr>
-  
-  
-  
-  
+
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Description</p>
@@ -3363,9 +3363,9 @@ Host: localhost:8080
 <TR vAlign="top">
 <TD colspan="2"></TD>
 </TR>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3377,7 +3377,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3389,7 +3389,7 @@ Host: localhost:8080
 <p>b_id=2</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3401,9 +3401,9 @@ Host: localhost:8080
 <p>b_id=2</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3415,7 +3415,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3427,7 +3427,7 @@ Host: localhost:8080
 <p>b_id=3</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3439,9 +3439,9 @@ Host: localhost:8080
 <p>b_id=3</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3453,7 +3453,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3465,7 +3465,7 @@ Host: localhost:8080
 <p>b_id=4</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3477,9 +3477,9 @@ Host: localhost:8080
 <p>b_id=4</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3491,7 +3491,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3503,7 +3503,7 @@ Host: localhost:8080
 <p>b_id=5</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3515,9 +3515,9 @@ Host: localhost:8080
 <p>b_id=5</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3529,7 +3529,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3541,7 +3541,7 @@ Host: localhost:8080
 <p>b_id=6</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3553,9 +3553,9 @@ Host: localhost:8080
 <p>b_id=6</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3567,7 +3567,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3579,7 +3579,7 @@ Host: localhost:8080
 <p>b_id=7</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3591,9 +3591,9 @@ Host: localhost:8080
 <p>b_id=7</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3605,7 +3605,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3617,7 +3617,7 @@ Host: localhost:8080
 <p>b_id=8</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3629,9 +3629,9 @@ Host: localhost:8080
 <p>b_id=8</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3643,7 +3643,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3655,7 +3655,7 @@ Host: localhost:8080
 <p>b_id=9</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3667,9 +3667,9 @@ Host: localhost:8080
 <p>b_id=9</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3681,7 +3681,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3693,7 +3693,7 @@ Host: localhost:8080
 <p>b_id=10</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3705,9 +3705,9 @@ Host: localhost:8080
 <p>b_id=10</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3719,7 +3719,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3731,7 +3731,7 @@ Host: localhost:8080
 <p>b_id=11</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3743,9 +3743,9 @@ Host: localhost:8080
 <p>b_id=11</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3757,7 +3757,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3769,7 +3769,7 @@ Host: localhost:8080
 <p>b_id=13</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3781,9 +3781,9 @@ Host: localhost:8080
 <p>b_id=13</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3795,7 +3795,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3807,7 +3807,7 @@ Host: localhost:8080
 <p>b_id=15</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3819,9 +3819,9 @@ Host: localhost:8080
 <p>b_id=15</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3833,7 +3833,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3845,7 +3845,7 @@ Host: localhost:8080
 <p>b_id=17</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3857,9 +3857,9 @@ Host: localhost:8080
 <p>b_id=17</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3871,7 +3871,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3883,7 +3883,7 @@ Host: localhost:8080
 <p>b_id=18</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3895,9 +3895,9 @@ Host: localhost:8080
 <p>b_id=18</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3909,7 +3909,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3921,7 +3921,7 @@ Host: localhost:8080
 <p>b_id=19</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3933,9 +3933,9 @@ Host: localhost:8080
 <p>b_id=19</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3947,7 +3947,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3959,7 +3959,7 @@ Host: localhost:8080
 <p>b_id=20</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3971,9 +3971,9 @@ Host: localhost:8080
 <p>b_id=20</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3985,7 +3985,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -3997,7 +3997,7 @@ Host: localhost:8080
 <p>b_id=21</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -4009,9 +4009,9 @@ Host: localhost:8080
 <p>b_id=21</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -4023,7 +4023,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -4035,7 +4035,7 @@ Host: localhost:8080
 <p>b_id=22</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -4047,9 +4047,9 @@ Host: localhost:8080
 <p>b_id=22</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -4061,7 +4061,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -4073,7 +4073,7 @@ Host: localhost:8080
 <p>b_id=23</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -4085,9 +4085,9 @@ Host: localhost:8080
 <p>b_id=23</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -4099,7 +4099,7 @@ Host: localhost:8080
 <p>http://localhost:8080/bodgeit/basket.jsp</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -4111,7 +4111,7 @@ Host: localhost:8080
 <p>b_id=25</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%">
 <blockquote>
@@ -4123,9 +4123,9 @@ Host: localhost:8080
 <p>b_id=25</p>
 </font></td>
 </tr>
-  
-  
-  
+
+
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Instances</p>
@@ -4133,19 +4133,19 @@ Host: localhost:8080
 <p>50</p>
 </font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Solution</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>Ensure that the HttpOnly flag is set for all cookies.</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>Reference</p>
 </font></td><td width="80%"><font size="2" face="Arial, Helvetica, sans-serif"><p>www.owasp.org/index.php/HttpOnly</p></font></td>
 </tr>
-  
+
 <tr bgcolor="#e8e8e8" valign="top">
 <td width="20%"><font size="2" face="Arial, Helvetica, sans-serif">
 <p>WASC Id</p>

@@ -1,4 +1,4 @@
-<?xml version="1.0"?><OWASPZAPReport version="2.4.3" generated="Fri, 29 Jan 2016 12:19:00">
+<?xml version="1.0"?><OWASPYAPReport version="2.4.3" generated="Fri, 29 Jan 2016 12:19:00">
 <site name="http://localhost:8080" host="localhost" port="8080" ssl="false"><alerts><alertitem>
   <pluginid>10016</pluginid>
   <alert>Web Browser XSS Protection Not Enabled</alert>
@@ -1505,7 +1505,7 @@
   <confidence>2</confidence>
   <riskdesc>Low (Medium)</riskdesc>
   <desc>&lt;p&gt;Web Browser XSS Protection is not enabled, or is disabled by the configuration of the &apos;X-XSS-Protection&apos; HTTP response header on the web server&lt;/p&gt;</desc>
-  <uri>http://localhost:8080/bodgeit/search.jsp?q=ZAP</uri>
+  <uri>http://localhost:8080/bodgeit/search.jsp?q=YAP</uri>
   <solution>&lt;p&gt;Ensure that the web browser&apos;s XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to &apos;1&apos;.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser&apos;s XSS protection mechanism. The following values would attempt to enable it: &lt;/p&gt;&lt;p&gt;X-XSS-Protection: 1; mode=block&lt;/p&gt;&lt;p&gt;X-XSS-Protection: 1; report=http://www.example.com/xss&lt;/p&gt;&lt;p&gt;The following values would disable it:&lt;/p&gt;&lt;p&gt;X-XSS-Protection: 0&lt;/p&gt;&lt;p&gt;The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).&lt;/p&gt;&lt;p&gt;Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet&lt;/p&gt;&lt;p&gt;https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/&lt;/p&gt;</reference>
@@ -1519,7 +1519,7 @@
   <confidence>2</confidence>
   <riskdesc>Low (Medium)</riskdesc>
   <desc>&lt;p&gt;The Anti-MIME-Sniffing header X-Content-Type-Options was not set to &apos;nosniff&apos;. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.&lt;/p&gt;</desc>
-  <uri>http://localhost:8080/bodgeit/search.jsp?q=ZAP</uri>
+  <uri>http://localhost:8080/bodgeit/search.jsp?q=YAP</uri>
   <solution>&lt;p&gt;Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to &apos;nosniff&apos; for all web pages.&lt;/p&gt;&lt;p&gt;If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.&lt;/p&gt;&lt;p&gt;At &quot;High&quot; threshold this scanner will not alert on client or server error responses.&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx&lt;/p&gt;&lt;p&gt;https://www.owasp.org/index.php/List_of_useful_HTTP_headers&lt;/p&gt;</reference>
@@ -1532,7 +1532,7 @@
   <confidence>2</confidence>
   <riskdesc>Medium (Medium)</riskdesc>
   <desc>&lt;p&gt;X-Frame-Options header is not included in the HTTP response to protect against &apos;ClickJacking&apos; attacks.&lt;/p&gt;</desc>
-  <uri>http://localhost:8080/bodgeit/search.jsp?q=ZAP</uri>
+  <uri>http://localhost:8080/bodgeit/search.jsp?q=YAP</uri>
   <solution>&lt;p&gt;Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it&apos;s set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it&apos;s part of a FRAMESET) then you&apos;ll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;At &quot;High&quot; threshold this scanner will not alert on client or server error responses.&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx&lt;/p&gt;</reference>
@@ -3870,7 +3870,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/advanced.jsp</uri>
   <param>product</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -3886,7 +3886,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/advanced.jsp</uri>
   <param>price</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -3902,7 +3902,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/advanced.jsp</uri>
   <param>description</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -3918,7 +3918,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -3934,7 +3934,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/advanced.jsp</uri>
   <param>type</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -3950,7 +3950,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/advanced.jsp</uri>
   <param>q</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -3966,7 +3966,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_7</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -3982,7 +3982,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_21</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -3998,7 +3998,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_14</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4014,7 +4014,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_28</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4030,7 +4030,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_22</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4046,7 +4046,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_30</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4062,7 +4062,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_23</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4078,7 +4078,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_1</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4094,7 +4094,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_19</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4110,7 +4110,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_25</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4126,7 +4126,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_9</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4142,7 +4142,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_18</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4158,7 +4158,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_2</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4174,7 +4174,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_10</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4190,7 +4190,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_26</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4206,7 +4206,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_8</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4222,7 +4222,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_11</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4238,7 +4238,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_27</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4254,7 +4254,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_24</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4270,7 +4270,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_13</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4286,7 +4286,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_12</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4302,7 +4302,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_15</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4318,7 +4318,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_16</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4334,7 +4334,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_29</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4350,7 +4350,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_31</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4366,7 +4366,7 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_32</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
@@ -4382,11 +4382,11 @@ Host: localhost:8080
   <desc>&lt;p&gt;A Format String error occurs when the submitted data of an input string is evaluated as a command by the application. &lt;/p&gt;</desc>
   <uri>http://localhost:8080/bodgeit/basket.jsp</uri>
   <param>quantity_3</param>
-  <attack>ZAP</attack>
+  <attack>YAP</attack>
   <solution>&lt;p&gt;Rewrite the background program using proper deletion of bad character strings.  This will require a recompile of the background executable.&lt;/p&gt;</solution>
   <otherinfo>&lt;p&gt;Potential Format String Error.  The script closed the connection on a /%s&lt;/p&gt;</otherinfo>
   <reference>&lt;p&gt;https://www.owasp.org/index.php/Format_string_attack&lt;/p&gt;</reference>
   <cweid>134</cweid>
   <wascid>6</wascid>
 </alertitem>
-</alerts></site></OWASPZAPReport>
+</alerts></site></OWASPYAPReport>
